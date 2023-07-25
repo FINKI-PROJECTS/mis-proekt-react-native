@@ -17,7 +17,7 @@ function TabBarIcon(props: {
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  createTestData({ id: '1', name: 'test', description: 'test' });
+  createTestData({ id: '2', name: 'test', description: 'test2' });
   return (
     <Tabs
       screenOptions={{
