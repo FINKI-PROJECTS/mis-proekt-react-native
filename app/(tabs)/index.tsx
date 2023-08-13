@@ -9,9 +9,9 @@ export default function TabOneScreen() {
         <ImageBackground source={require('../../assets/images/background.png')}
           style={styles.background}>
           <View style={styles.container}>
-            <PrimaryButton title={'Најави се'}/>
-            <PrimaryButton title={'Регистрирај се'}/>
-            <PrimaryButton title={'Разгледај'}/>
+            <PrimaryButton title={'Најави се'} name={'pages/login'}/>
+            <PrimaryButton title={'Регистрирај се'} name={'pages/register'}/>
+            <PrimaryButton title={'Разгледај'} name={'catalogue'}/>
             <View style={[styles.welcome_info, globalStyles.shadow]}>
               <Text style={[styles.welcome, globalStyles.text_white]}>Добредојде!</Text>
               <Text style={[styles.welcome, globalStyles.text_white]}>
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     backgroundColor: '#7891D3',
     padding: 10,
-    borderRadius: -10
+    borderRadius: 10
   },
   welcome: {
     textAlign: 'center',

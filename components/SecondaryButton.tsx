@@ -4,7 +4,7 @@ import globalStyles from '../assets/css/globalStyles';
 import {useNavigation} from "expo-router";
 
 // @ts-ignore
-const PrimaryButton = ( {title, name} ) => {
+const SecondaryButton = ( {title, name} ) => {
 
     const navigation = useNavigation();
 
@@ -14,8 +14,8 @@ const PrimaryButton = ( {title, name} ) => {
     };
 
     return (
-        <TouchableOpacity style={[globalStyles.primary_button, globalStyles.shadow]} onPress={handlePress}>
-            <Text style={styles.buttonText}>{title}</Text>
+        <TouchableOpacity style={[globalStyles.secondary_button, globalStyles.shadow]} onPress={handlePress}>
+            <Text style={[styles.buttonText, globalStyles.text_white]}>{title}</Text>
         </TouchableOpacity>
     );
 };
@@ -23,9 +23,9 @@ const PrimaryButton = ( {title, name} ) => {
 const styles = StyleSheet.create({
     buttonText: {
         textAlign: 'center',
-        color: 'white',
         fontSize: 18,
+        fontWeight: 'bold'
     },
 });
 
-export default PrimaryButton;
+export default SecondaryButton;
