@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e1a3114-aaf9-404b-85a6-43335bd1b3bf" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/(tabs)/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(tabs)/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/pages/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/Login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/pages/register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/Register.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/globalStyles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/globalStyles.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/CustomHeaderIcon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/CustomHeaderIcon.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/PrimaryButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/buttons/PrimaryButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/SecondaryButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/buttons/SecondaryButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn-error.log" beforeDir="false" afterPath="$PROJECT_DIR$/yarn-error.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
-    </list>
+    <list default="true" id="4e1a3114-aaf9-404b-85a6-43335bd1b3bf" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,7 +37,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "feature/login-register",
+    "git-widget-placeholder": "feature/products",
     "last_opened_file_path": "D:/FINKI/VII_Semestar/Mobilni informaciski sistemi/mis-proekt-react-native",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
