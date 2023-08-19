@@ -2,16 +2,16 @@ import {Button, Image, ImageBackground, StyleSheet} from 'react-native';
 
 import { Text, View } from '../../components/Themed';
 import globalStyles from '../../assets/css/globalStyles';
-import PrimaryButton from "../../components/PrimaryButton";
+import PrimaryButton from "../../components/buttons/PrimaryButton";
 
 export default function TabOneScreen() {
   return (
         <ImageBackground source={require('../../assets/images/background.png')}
-          style={styles.background}>
+          style={globalStyles.background}>
           <View style={styles.container}>
-            <PrimaryButton title={'Најави се'} name={'pages/login'}/>
-            <PrimaryButton title={'Регистрирај се'} name={'pages/register'}/>
-            <PrimaryButton title={'Разгледај'} name={'catalogue'}/>
+            <PrimaryButton title={'Најави се'} name={'pages/Login'}/>
+            <PrimaryButton title={'Регистрирај се'} name={'pages/Register'}/>
+            <PrimaryButton title={'Разгледај'} name={'pages/Catalogue'}/>
             <View style={[styles.welcome_info, globalStyles.shadow]}>
               <Text style={[styles.welcome, globalStyles.text_white]}>Добредојде!</Text>
               <Text style={[styles.welcome, globalStyles.text_white]}>
@@ -32,10 +32,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     marginVertical: 60
   },
-  background: {
-    flex: 1,
-    resizeMode: 'contain',
-  },
   welcome_info: {
     width: 250,
     marginVertical: 20,
@@ -46,6 +42,7 @@ const styles = StyleSheet.create({
   welcome: {
     textAlign: 'center',
     flexWrap: 'wrap',
-    textAlignVertical: 'top'
+    textAlignVertical: 'top',
+    fontSize: 16
   }
 });

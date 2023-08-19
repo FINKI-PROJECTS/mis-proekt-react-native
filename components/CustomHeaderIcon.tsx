@@ -1,13 +1,19 @@
 import React from 'react';
-import {Image, StyleSheet} from 'react-native';
+import {Image, SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import {View} from "./Themed";
+import globalStyles from "../assets/css/globalStyles";
 
-// @ts-ignore
-const CustomHeaderIcon = ({ source }) => {
+interface CustomHeaderIconProps {
+    source: string
+}
+const CustomHeaderIcon: React.FC<CustomHeaderIconProps> = ({ source }) => {
+
     return (
-        <View style={styles.container}>
-            <Image source={source} style={styles.image} />
-        </View>
+        <SafeAreaView style={globalStyles.background_white}>
+            <View style={[styles.container]}>
+                <Image source={source} style={styles.image} />
+            </View>
+        </SafeAreaView>
     );
 };
 
@@ -23,7 +29,7 @@ const styles = StyleSheet.create({
         width: 270,
         height: 55,
         marginVertical: 30,
-        marginTop: 50
+        marginTop: StatusBar.currentHeight
     }
 });
 

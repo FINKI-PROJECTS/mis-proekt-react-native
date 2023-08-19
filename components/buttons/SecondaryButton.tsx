@@ -1,20 +1,16 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
-import globalStyles from '../assets/css/globalStyles';
+import globalStyles from '../../assets/css/globalStyles';
 import {useNavigation} from "expo-router";
 
-// @ts-ignore
-const SecondaryButton = ( {title, name} ) => {
+interface SecondaryButtonProps {
+    title: string;
+}
 
-    const navigation = useNavigation();
-
-    const handlePress = () => {
-        // Navigate to the new screen
-        navigation.navigate(name);
-    };
+const SecondaryButton: React.FC<SecondaryButtonProps> = ({ title }) => {
 
     return (
-        <TouchableOpacity style={[globalStyles.secondary_button, globalStyles.shadow]} onPress={handlePress}>
+        <TouchableOpacity style={[globalStyles.secondary_button, globalStyles.shadow]}>
             <Text style={[styles.buttonText, globalStyles.text_white]}>{title}</Text>
         </TouchableOpacity>
     );
