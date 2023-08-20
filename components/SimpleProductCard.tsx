@@ -3,11 +3,7 @@ import {Image, StyleSheet, Text, TouchableOpacity} from "react-native";
 import {useNavigation} from "expo-router";
 import globalStyles from "../assets/css/globalStyles";
 
-interface SimpleProductCardProps {
-    name: string,
-    source: string
-}
-const SimpleProductCard: React.FC<SimpleProductCardProps> = ({ name, source }) => {
+export default function SimpleProductCard({ name, source }: {name: string, source: string}) {
 
     const navigation = useNavigation();
 
@@ -21,7 +17,6 @@ const SimpleProductCard: React.FC<SimpleProductCardProps> = ({ name, source }) =
     );
 };
 
-export default SimpleProductCard;
 
 const styles = StyleSheet.create({
     title: {

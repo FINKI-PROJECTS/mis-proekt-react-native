@@ -2,10 +2,12 @@ import {StyleSheet} from 'react-native';
 
 const globalStyles = StyleSheet.create({
     container: {
-        flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white',
+        backgroundColor: '#7891D3',
+        marginVertical: 20,
+        paddingVertical: 20,
+        marginHorizontal: 35,
+        borderRadius: 25,
     },
     text_white: {
         color: 'white',
@@ -49,6 +51,8 @@ const globalStyles = StyleSheet.create({
     backButton: {
         width: 105,
         height: 35,
+        marginStart: 35,
+        marginTop: 45,
         borderRadius: 20,
         backgroundColor: '#7891D3',
         justifyContent: 'space-between',
@@ -89,6 +93,7 @@ const globalStyles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 4,
+        alignSelf: 'center'
     },
     background_transparent: {
         flex: 1,
@@ -116,11 +121,18 @@ const globalStyles = StyleSheet.create({
     },
     simpleProduct: {
         margin: 20,
-        backgroundColor: 'rgba(120, 145, 211, 0.7)',
+        backgroundColor: '#7891D3',
         paddingVertical: 25,
         marginHorizontal: 35,
         borderRadius: 25,
         alignItems: 'center'
+    },
+    simpleLogo: {
+        alignSelf: 'center',
+        width: 125,
+        height: 125,
+        resizeMode: 'contain',
+        marginVertical: 30,
     }
 });
 

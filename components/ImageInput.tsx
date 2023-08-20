@@ -1,12 +1,8 @@
 import React, {SetStateAction} from 'react';
 import {View, Image, TouchableOpacity, StyleSheet} from 'react-native';
 
-interface ImageInputProps {
-    onPress: () => Promise<void>;
-    imageUri: null;
-}
 
-const ImageInput: React.FC<ImageInputProps> = ({ onPress, imageUri }) => {
+export default function ImageInput({ onPress, imageUri }: {onPress: () => Promise<void>, imageUri: null}) {
     const defaultImageUri = require('../assets/images/user_photo.png');
 
     return (
@@ -26,10 +22,10 @@ const styles = StyleSheet.create({
         height: 95,
         width: 99,
         borderRadius: 100,
-        marginBottom: 20
+        marginBottom: 20,
+        alignSelf: 'center'
     },
 });
 
-export default ImageInput
 
 

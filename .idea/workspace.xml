@@ -4,7 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e1a3114-aaf9-404b-85a6-43335bd1b3bf" name="Changes" comment="" />
+    <list default="true" id="4e1a3114-aaf9-404b-85a6-43335bd1b3bf" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app/pages/categories.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(tabs)/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(tabs)/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(tabs)/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(tabs)/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/pages/Catalogue.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/pages/List-Of-Products.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/list-of-products.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/pages/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/pages/Product.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/product.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/pages/Register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/register.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/globalStyles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/globalStyles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/CustomAddressInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/AddressInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/CustomHeaderIcon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/HeaderIcon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/CustomNavbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/ImageInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ImageInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/SimpleProductCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/SimpleProductCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/buttons/CategoryButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/buttons/CategoryButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/buttons/CustomBackButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/buttons/BackButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/buttons/PrimaryButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/buttons/PrimaryButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/buttons/SecondaryButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/buttons/SecondaryButton.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,21 +53,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "feature/products",
-    "last_opened_file_path": "D:/FINKI/VII_Semestar/Mobilni informaciski sistemi/mis-proekt-react-native",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-    "ts.external.directory.path": "D:\\FINKI\\VII_Semestar\\Mobilni informaciski sistemi\\mis-proekt-react-native\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/products&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/FINKI/VII_Semestar/Mobilni informaciski sistemi/mis-proekt-react-native&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\FINKI\\VII_Semestar\\Mobilni informaciski sistemi\\mis-proekt-react-native\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\FINKI\VII_Semestar\Mobilni informaciski sistemi\mis-proekt-react-native\components\buttons" />
@@ -66,6 +87,7 @@
       <workItem from="1691850869772" duration="194000" />
       <workItem from="1691918374700" duration="13024000" />
       <workItem from="1692345560365" duration="31078000" />
+      <workItem from="1692536162461" duration="10536000" />
     </task>
     <servers />
   </component>

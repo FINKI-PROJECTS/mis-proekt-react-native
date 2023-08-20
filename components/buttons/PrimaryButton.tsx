@@ -3,12 +3,7 @@ import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import globalStyles from '../../assets/css/globalStyles';
 import {useNavigation} from "expo-router";
 
-interface PrimaryButtonProps {
-    title: string;
-    name: string;
-}
-
-const PrimaryButton: React.FC<PrimaryButtonProps> = ({ title, name }) => {
+export default function PrimaryButton({ title, name }: { title: string, name: string}) {
 
     const navigation = useNavigation();
 
@@ -26,5 +21,3 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
 });
-
-export default PrimaryButton;

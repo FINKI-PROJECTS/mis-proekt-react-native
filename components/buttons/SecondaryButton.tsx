@@ -1,13 +1,8 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import globalStyles from '../../assets/css/globalStyles';
-import {useNavigation} from "expo-router";
 
-interface SecondaryButtonProps {
-    title: string;
-}
-
-const SecondaryButton: React.FC<SecondaryButtonProps> = ({ title }) => {
+export default function SecondaryButton({ title }: {title: string}) {
 
     return (
         <TouchableOpacity style={[globalStyles.secondary_button, globalStyles.shadow]}>
@@ -23,5 +18,3 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
 });
-
-export default SecondaryButton;

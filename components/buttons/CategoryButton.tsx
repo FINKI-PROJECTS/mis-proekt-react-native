@@ -3,11 +3,7 @@ import {StyleSheet, Text, TouchableOpacity} from "react-native";
 import globalStyles from "../../assets/css/globalStyles";
 import {useNavigation} from "expo-router";
 
-interface CategoryButtonProps {
-    name: string,
-    title: string
-}
-const CategoryButton: React.FC<CategoryButtonProps> = ({ name, title }) => {
+export default function CategoryButton({ name, title }: {name: string, title: string}) {
 
     const navigation = useNavigation();
 
@@ -18,7 +14,6 @@ const CategoryButton: React.FC<CategoryButtonProps> = ({ name, title }) => {
     );
 };
 
-export default CategoryButton;
 
 const styles = StyleSheet.create({
     title: {

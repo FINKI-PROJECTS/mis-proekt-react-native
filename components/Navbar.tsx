@@ -2,10 +2,8 @@ import React, {useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, StatusBar, SafeAreaView} from 'react-native';
 import {View} from "./Themed";
 import globalStyles from "../assets/css/globalStyles";
-import ImageInput from "./ImageInput";
 
-// @ts-ignore
-const CustomNavbar = () => {
+export default function Navbar() {
 
     const [userId, setUserId] = useState('');
 
@@ -49,4 +47,3 @@ const styles = StyleSheet.create({
     }
 });
 
-export default CustomNavbar;

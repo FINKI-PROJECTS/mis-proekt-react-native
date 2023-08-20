@@ -3,10 +3,7 @@ import {Image, SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import {View} from "./Themed";
 import globalStyles from "../assets/css/globalStyles";
 
-interface CustomHeaderIconProps {
-    source: string
-}
-const CustomHeaderIcon: React.FC<CustomHeaderIconProps> = ({ source }) => {
+export default function HeaderIcon ({ source }: { source: string }) {
 
     return (
         <SafeAreaView style={globalStyles.background_white}>
@@ -33,4 +30,3 @@ const styles = StyleSheet.create({
     }
 });
 
-export default CustomHeaderIcon;

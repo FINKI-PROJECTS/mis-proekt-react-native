@@ -4,12 +4,13 @@ import {View, TextInput, TouchableOpacity, StyleSheet, Text, TouchableWithoutFee
 import Icon from 'react-native-vector-icons/FontAwesome';
 import globalStyles from "../assets/css/globalStyles"; // Import an icon from your chosen icon library
 
-interface CustomAddressInputProps {
+
+export default function AddressInput({value, onChangeText, infoMessage}: {
     value: string;
     onChangeText: (text: SetStateAction<string>) => void;
     infoMessage: string;
-}
-const CustomAddressInput: React.FC<CustomAddressInputProps> = ({value, onChangeText, infoMessage}) => {
+})
+{
 
     const [showInfo, setShowInfo] = useState(false);
 
@@ -66,11 +67,11 @@ const styles = StyleSheet.create({
     },
     overlay: {
         flex: 1,
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
         justifyContent: 'center',
         alignItems: 'center',
     },
     infoTooltip: {
+        width: 250,
         backgroundColor: 'white',
         padding: 10,
         borderRadius: 8,
@@ -79,5 +80,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default CustomAddressInput;
 
