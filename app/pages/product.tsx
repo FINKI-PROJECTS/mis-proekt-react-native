@@ -12,6 +12,7 @@ import globalStyles from "../../assets/css/globalStyles";
 import Navbar from "../../components/Navbar";
 import CategoryButton from "../../components/buttons/CategoryButton";
 import BackButton from "../../components/buttons/BackButton";
+import ContactFooter from "../../components/ContactFooter";
 
 export default function Product() {
     return (
@@ -52,6 +53,7 @@ export default function Product() {
                     </ScrollView>
                 </ImageBackground>
             </KeyboardAvoidingView>
+            <ContactFooter/>
         </View>
     )
 }
