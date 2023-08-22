@@ -15,6 +15,7 @@ import SecondaryButton from "../../components/buttons/SecondaryButton";
 import ImageInput from "../../components/ImageInput";
 import AddressInput from "../../components/AddressInput";
 import BackButton from "../../components/buttons/BackButton";
+import {useNavigation} from "expo-router";
 
 export default function RegisterScreen() {
 
@@ -25,6 +26,8 @@ export default function RegisterScreen() {
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
+
+    const navigator = useNavigation();
 
     // Functions to handle input changes
     const handleImagePress = async () => {
@@ -64,9 +67,10 @@ export default function RegisterScreen() {
         setPassword(text);
     };
 
-    // Function to handle form submission
+    //TODO Save user in firebase
     const handleRegister = () => {
-        //TODO Save it in firebase
+
+        navigator.navigate('pages/login' as never)
     };
 
     return (
@@ -75,10 +79,10 @@ export default function RegisterScreen() {
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
             <ImageBackground source={require('../../assets/images/background.png')}
                              style={globalStyles.background}>
-                <ScrollView contentContainerStyle={globalStyles.scrollView}>
+                <ScrollView contentContainerStyle={globalStyles.scroll_view}>
                     <BackButton title={"Назад"} source={require('../../assets/images/back-icon.png')}/>
                     <View style={globalStyles.container}>
-                        <Image source={require('../../assets/images/simple-logo.png')} style={globalStyles.simpleLogo}/>
+                        <Image source={require('../../assets/images/simple-logo.png')} style={globalStyles.simple_logo}/>
                         <Text style={globalStyles.title}>Регистрирај се</Text>
 
                         <ImageInput onPress={handleImagePress} imageUri={selectedImage}/>
@@ -125,9 +129,7 @@ export default function RegisterScreen() {
                             onChangeText={handlePasswordChange}
                         />
 
-                        <TouchableOpacity onPress={handleRegister}>
-                            <SecondaryButton title="Регистрирај се"/>
-                        </TouchableOpacity>
+                        <SecondaryButton title="Регистрирај се" onPress={handleRegister}/>
                     </View>
                 </ScrollView>
             </ImageBackground>

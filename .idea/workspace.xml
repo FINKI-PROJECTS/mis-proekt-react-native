@@ -6,8 +6,22 @@
   <component name="ChangeListManager">
     <list default="true" id="4e1a3114-aaf9-404b-85a6-43335bd1b3bf" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(tabs)/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(tabs)/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/pages/categories.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/categories.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/pages/list-of-products.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/list-of-products.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/pages/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/login.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/pages/product.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/product.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/pages/register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/register.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/globalStyles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/globalStyles.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/ContactFooter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/ContactFooter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/SimpleProductCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/SimpleProductCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/buttons/BackButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/buttons/BackButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/buttons/CategoryButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/buttons/CategoryButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/buttons/SecondaryButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/buttons/SecondaryButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +55,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;feature/products&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/users&quot;,
     &quot;last_opened_file_path&quot;: &quot;D:/FINKI/VII_Semestar/Mobilni informaciski sistemi/mis-proekt-react-native&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -70,7 +84,9 @@
       <workItem from="1691850869772" duration="194000" />
       <workItem from="1691918374700" duration="13024000" />
       <workItem from="1692345560365" duration="31078000" />
-      <workItem from="1692536162461" duration="12689000" />
+      <workItem from="1692536162461" duration="14291000" />
+      <workItem from="1692601200960" duration="10099000" />
+      <workItem from="1692689264827" duration="17418000" />
     </task>
     <servers />
   </component>

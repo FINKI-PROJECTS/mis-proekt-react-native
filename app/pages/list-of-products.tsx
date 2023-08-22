@@ -13,17 +13,17 @@ export default function ListOfProducts() {
 
     return (
         <View style={globalStyles.background_transparent}>
-            <Navbar/>
-            <ScrollView style={globalStyles.background_transparent}>
-                <ImageBackground source={require('../../assets/images/background.png')}
-                                 style={globalStyles.background}>
+            <Navbar user={'userId'}/>
+            <ImageBackground source={require('../../assets/images/background.png')}
+                             style={globalStyles.background}>
+                <ScrollView>
                     <BackButton title={"Назад"} source={require('../../assets/images/back-icon.png')}/>
                     <SimpleProductCard name={'pages/product'}
                                        source={require('../../assets/images/example-cloth.png')}/>
                     <SimpleProductCard name={'pages/product'}
                                        source={require('../../assets/images/example-cloth-2.png')}/>
-                </ImageBackground>
-            </ScrollView>
+                </ScrollView>
+            </ImageBackground>
         </View>
     )
 }

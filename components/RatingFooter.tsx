@@ -2,18 +2,11 @@ import {StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import globalStyles from "../assets/css/globalStyles";
 import {useNavigation} from "expo-router";
 
-export default function ContactFooter({sellerId}: {sellerId: string}) {
-
-    const navigation = useNavigation();
-
-    const handleSeller = () => {
-        //TODO open the page of the selected sellers cloth
-        navigation.navigate("pages/seller" as never);
-    }
+export default function RatingFooter({onPress}: {onPress: () => void}) {
 
     return (
-        <TouchableOpacity style={[styles.container, globalStyles.background_blue]} onPress={handleSeller}>
-            <Text style={styles.text}>Контактирај продавач</Text>
+        <TouchableOpacity style={[styles.container, globalStyles.background_blue]} onPress={onPress}>
+            <Text style={styles.text}>Остави рејтинг</Text>
         </TouchableOpacity>
     )
 }

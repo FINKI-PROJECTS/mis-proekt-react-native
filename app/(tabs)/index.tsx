@@ -1,9 +1,10 @@
-import {Button, Image, ImageBackground, StyleSheet} from 'react-native';
+import {ImageBackground, StyleSheet} from 'react-native';
 
 import {Text, View} from '../../components/Themed';
 import globalStyles from '../../assets/css/globalStyles';
 import PrimaryButton from "../../components/buttons/PrimaryButton";
 
+// TODO this page is only shown if the user is not logged in
 export default function TabOneScreen() {
     return (
         <ImageBackground source={require('../../assets/images/background.png')}

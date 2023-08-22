@@ -8,7 +8,7 @@ export default function BackButton({ title, source }: {title: string, source: st
     const navigation = useNavigation();
 
     return (
-        <TouchableOpacity style={[globalStyles.backButton, globalStyles.shadow]} onPress={() => navigation.goBack()}>
+        <TouchableOpacity style={[globalStyles.back_button, globalStyles.shadow]} onPress={() => navigation.goBack()}>
             <Image source={source} style={styles.backIcon}/>
             <Text style={[globalStyles.text_white, styles.title]}>{title}</Text>
         </TouchableOpacity>

@@ -5,6 +5,7 @@ const globalStyles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#7891D3',
         marginVertical: 20,
+        marginBottom: 40,
         paddingVertical: 20,
         marginHorizontal: 35,
         borderRadius: 25,
@@ -37,7 +38,7 @@ const globalStyles = StyleSheet.create({
         borderWidth: 2,
         width: '70%'
     },
-    categoryButton: {
+    category_button: {
         alignItems: 'center',
         justifyContent: 'center',
         alignSelf: 'center',
@@ -48,7 +49,7 @@ const globalStyles = StyleSheet.create({
         height: 50,
         borderRadius: 10
     },
-    backButton: {
+    back_button: {
         width: 105,
         height: 35,
         marginStart: 35,
@@ -60,7 +61,7 @@ const globalStyles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center'
     },
-    scrollView: {
+    scroll_view: {
         flexGrow: 1,
         justifyContent: 'center'
     },
@@ -106,20 +107,20 @@ const globalStyles = StyleSheet.create({
         marginBottom: 40,
         textAlign: 'center'
     },
-    clothImage: {
+    cloth_image: {
         width: 270,
         height: 270,
         marginTop: 5,
         borderRadius: 20
     },
-    clothDescription: {
+    cloth_description: {
         paddingVertical: 20,
         width: 250,
         flexGrow: 1,
         justifyContent: 'space-between',
         flexDirection: "row"
     },
-    simpleProduct: {
+    simple_product: {
         margin: 20,
         backgroundColor: '#7891D3',
         paddingVertical: 25,
@@ -127,12 +128,27 @@ const globalStyles = StyleSheet.create({
         borderRadius: 25,
         alignItems: 'center'
     },
-    simpleLogo: {
+    simple_logo: {
         alignSelf: 'center',
         width: 125,
         height: 125,
         resizeMode: 'contain',
         marginVertical: 30,
+    },
+    white_container: {
+        width: 280,
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center',
+        borderRadius: 20
+    },
+    wide_title: {
+        textAlign: 'center',
+        color: '#7891D3',
+        fontSize: 40,
+        letterSpacing: 4,
+        paddingTop: 30
     }
 });
 

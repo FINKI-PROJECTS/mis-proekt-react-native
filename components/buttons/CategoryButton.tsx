@@ -3,12 +3,12 @@ import {StyleSheet, Text, TouchableOpacity} from "react-native";
 import globalStyles from "../../assets/css/globalStyles";
 import {useNavigation} from "expo-router";
 
-export default function CategoryButton({ name, title }: {name: string, title: string}) {
+export default function CategoryButton({ title, onPress }: {title: string, onPress: () => void}) {
 
     const navigation = useNavigation();
 
     return (
-        <TouchableOpacity style={[globalStyles.categoryButton]} onPress={() => navigation.navigate(name as never)}>
+        <TouchableOpacity style={[globalStyles.category_button, globalStyles.shadow]} onPress={onPress}>
             <Text style={[globalStyles.text_blue, styles.title]}>{title}</Text>
         </TouchableOpacity>
     );

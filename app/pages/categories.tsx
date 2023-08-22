@@ -12,34 +12,39 @@ import Navbar from "../../components/Navbar";
 import globalStyles from "../../assets/css/globalStyles";
 import CategoryButton from "../../components/buttons/CategoryButton";
 import BackButton from "../../components/buttons/BackButton";
+import {useNavigation} from "expo-router";
 
 export default function Categories() {
 
+    const navigator = useNavigation();
+
+    // TODO navigate to the list of products from the specific category
+    const handleNavigation = () => {
+        navigator.navigate('pages/list-of-products' as never);
+    }
+
     return (
         <View style={globalStyles.background_transparent}>
-            <Navbar/>
-            <KeyboardAvoidingView
-                style={globalStyles.background_transparent}
-                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-                <ImageBackground source={require('../../assets/images/background.png')}
-                                 style={globalStyles.background}>
-                    <ScrollView>
-                        <BackButton title={"Назад"} source={require('../../assets/images/back-icon.png')}/>
-                        <View style={globalStyles.container}>
-                            <Text style={globalStyles.title}>Категории</Text>
-                            <CategoryButton title={"Блузи"} name={'pages/list-of-products'}/>
-                            <CategoryButton title={"Панталони"} name={'pages/list-of-products'}/>
-                            <CategoryButton title={"Сукњи"} name={'pages/list-of-products'}/>
-                            <CategoryButton title={"Маици"} name={'pages/list-of-products'}/>
-                            <CategoryButton title={"Капи"} name={'pages/list-of-products'}/>
-                            <CategoryButton title={"Фустани"} name={'pages/list-of-products'}/>
-                            <TouchableOpacity style={styles.arrow}>
-                                <Image source={require('../../assets/images/arrow-down.png')} style={styles.arrow}/>
-                            </TouchableOpacity>
-                        </View>
-                    </ScrollView>
-                </ImageBackground>
-            </KeyboardAvoidingView>
+            <Navbar user={"userId"}/>
+            <ImageBackground source={require('../../assets/images/background.png')}
+                             style={globalStyles.background}>
+                <ScrollView>
+                    <BackButton title={"Назад"} source={require('../../assets/images/back-icon.png')}/>
+                    <View style={[globalStyles.container, globalStyles.shadow]}>
+                        <Text style={globalStyles.title}>Категории</Text>
+                        <CategoryButton title={"Блузи"} onPress={handleNavigation}/>
+                        <CategoryButton title={"Панталони"} onPress={handleNavigation}/>
+                        <CategoryButton title={"Сукњи"} onPress={handleNavigation}/>
+                        <CategoryButton title={"Маици"} onPress={handleNavigation}/>
+                        <CategoryButton title={"Капи"} onPress={handleNavigation}/>
+                        <CategoryButton title={"Фустани"} onPress={handleNavigation}/>
+                        {/*TODO list other categories*/}
+                        <TouchableOpacity style={styles.arrow}>
+                            <Image source={require('../../assets/images/arrow-down.png')} style={styles.arrow}/>
+                        </TouchableOpacity>
+                    </View>
+                </ScrollView>
+            </ImageBackground>
         </View>
     )
 }

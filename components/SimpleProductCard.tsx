@@ -8,8 +8,8 @@ export default function SimpleProductCard({ name, source }: {name: string, sourc
     const navigation = useNavigation();
 
     return (
-        <TouchableOpacity style={[globalStyles.simpleProduct]} onPress={() => navigation.navigate(name as never)}>
-            <Image source={source} style={globalStyles.clothImage}/>
+        <TouchableOpacity style={[globalStyles.simple_product, globalStyles.shadow]} onPress={() => navigation.navigate(name as never)}>
+            <Image source={source} style={globalStyles.cloth_image}/>
             <Text style={[globalStyles.text_white, styles.title]}>
                 /dynamic data/ ден.
             </Text>

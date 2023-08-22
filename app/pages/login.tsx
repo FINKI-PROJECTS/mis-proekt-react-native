@@ -37,7 +37,7 @@ export default function LoginScreen() {
         // Do something with the input value, e.g., submit it to a server
         console.log('Email:', email);
         console.log('Password:', password);
-        const name = "pages/catalogue"
+        const name = "pages/categories"
         navigation.navigate(name as never);
     };
 
@@ -47,10 +47,10 @@ export default function LoginScreen() {
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
             <ImageBackground source={require('../../assets/images/background.png')}
                              style={globalStyles.background}>
-                <ScrollView contentContainerStyle={globalStyles.scrollView}>
+                <ScrollView contentContainerStyle={globalStyles.scroll_view}>
                     <BackButton title={"Назад"} source={require('../../assets/images/back-icon.png')}/>
                     <View style={globalStyles.container}>
-                        <Image source={require('../../assets/images/simple-logo.png')} style={globalStyles.simpleLogo}/>
+                        <Image source={require('../../assets/images/simple-logo.png')} style={globalStyles.simple_logo}/>
                         <Text style={globalStyles.title}>Најави се</Text>
 
                         <TextInput
@@ -68,9 +68,7 @@ export default function LoginScreen() {
                             onChangeText={handlePasswordChange}
                         />
 
-                        <TouchableOpacity onPress={handleLogin}>
-                            <SecondaryButton title="Најави се"/>
-                        </TouchableOpacity>
+                        <SecondaryButton title="Најави се" onPress={handleLogin}/>
                     </View>
                 </ScrollView>
             </ImageBackground>

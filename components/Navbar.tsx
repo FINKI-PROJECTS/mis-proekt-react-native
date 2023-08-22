@@ -2,20 +2,26 @@ import React, {useState} from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, StatusBar, SafeAreaView} from 'react-native';
 import {View} from "./Themed";
 import globalStyles from "../assets/css/globalStyles";
+import {useNavigation} from "expo-router";
+import {set} from "firebase/database";
 
-export default function Navbar() {
+export default function Navbar({user}: {user: string}) {
 
     const [userId, setUserId] = useState('');
+    const navigation = useNavigation();
 
-    const handleOpenProfile = ({ userId }) => {
-        //TODO take informations about user and navigate to profile page
+    const handleOpenProfile = () => {
+        //TODO take information about user and navigate to profile page
+        //setUserId(user.userId);
+        navigation.navigate('pages/user-profile' as never)
     }
 
     return (
         <SafeAreaView style={[styles.container, globalStyles.background_blue]}>
             <View style={[styles.navContainer, globalStyles.background_blue]}>
                 <Image source={require('../assets/images/logo_white.png')} style={styles.image} />
-                <TouchableOpacity onPress={handleOpenProfile({userId})}>
+                {/*TODO When user is logged in, the user image should lead to his profile, when not, to login page*/}
+                <TouchableOpacity onPress={handleOpenProfile}>
                     <Image source={require('../assets/images/user_photo.png')} style={styles.logo} />
                 </TouchableOpacity>
             </View>
