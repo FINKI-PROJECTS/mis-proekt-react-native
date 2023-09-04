@@ -1,99 +1,120 @@
-import {Button, ImageBackground, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
+import {
+  Button,
+  ImageBackground,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import globalStyles from "../../assets/css/globalStyles";
 import Navbar from "../../components/Navbar";
 import BackButton from "../../components/buttons/BackButton";
 import StarRating from "../../components/StarRating";
 import MyProductsButton from "../../components/buttons/MyProductsButton";
-import {useNavigation} from "expo-router";
+import { useNavigation } from "expo-router";
+import { IRegister } from "../interfaces/types";
+import AddressInput from "../../components/AddressInput";
+interface IProps {
+  userName: string;
+  userSurname: string;
+  userEmail: string;
+  userAddress: string;
+  userPhone: string;
+  userPassword: string;
+}
+export default function UserProfile({ name, surname, email, address, phone }: Omit<IRegister, "password">) {
+  const navigator = useNavigation();
 
-export default function UserProfile( {userName, userSurname, userEmail, userAddress, userPhone, userPassword} :
-    {
-        userName: string
-        userSurname: string
-        userEmail: string
-        userAddress: string
-        userPhone: string
-        userPassword: string
-    }
-) {
+  const changeHandler = (name: string, value: string) => {};
 
-    const navigator = useNavigation()
+  // TODO take the list of ratings per user and calculate the average
+  const calculateRating = () => {
+    return 2;
+  };
 
-    const handleNameChange = () => {}
-    const handleSurnameChange = () => {}
-    const handleEmailChange = () => {}
-    const handleAddressChange = () => {}
-    const handlePhoneChange = () => {}
-    const handlePasswordChange = () => {}
+  // TODO using the user id, open his list of products
+  const openUserProducts = () => {
+    navigator.navigate("pages/user-list-of-products" as never);
+  };
 
-    // TODO take the list of ratings per user and calculate the average
-    const calculateRating = () => {
-        return 2
-    }
+  return (
+    <KeyboardAvoidingView
+      style={globalStyles.background_transparent}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}>
+      <Navbar user={"user1"} />
+      <ImageBackground source={require("../../assets/images/background.png")} style={globalStyles.background}>
+        <ScrollView>
+          <Text style={[globalStyles.wide_title]}>МОЈ ПРОФИЛ</Text>
+          <BackButton title={"Назад"} source={require("../../assets/images/back-icon.png")} />
+          <View style={globalStyles.container}>
+            <TextInput
+              style={globalStyles.input_field}
+              placeholder="Име"
+              value={name}
+              onChangeText={changeHandler.bind(null, "name")}
+            />
 
-    // TODO using the user id, open his list of products
-    const openUserProducts = () => {
+            <TextInput
+              style={globalStyles.input_field}
+              placeholder="Презиме"
+              value={surname}
+              onChangeText={changeHandler.bind(null, "surname")}
+            />
 
-        navigator.navigate('pages/user-list-of-products' as never)
-    }
+            <TextInput
+              style={globalStyles.input_field}
+              keyboardType="email-address"
+              placeholder="Емаил"
+              value={email}
+              onChangeText={changeHandler.bind(null, "email")}
+            />
 
-    return(
-        <KeyboardAvoidingView
-            style={globalStyles.background_transparent}
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-            <Navbar user={"user1"}/>
-            <ImageBackground source={require('../../assets/images/background.png')}
-                             style={globalStyles.background}>
-                <ScrollView>
-                    <Text style={[globalStyles.wide_title, styles.custom_width]}>МОЈ ПРОФИЛ</Text>
-                    <BackButton title={"Назад"} source={require('../../assets/images/back-icon.png')}/>
-                    <View style={globalStyles.container}>
-                        <TextInput style={globalStyles.input_field}
-                                   placeholder={userName}
-                                   value={userName}
-                                   onChangeText={handleNameChange}/>
-                        <TextInput style={globalStyles.input_field}
-                                   placeholder={userSurname}
-                                   value={userSurname}
-                                   onChangeText={handleSurnameChange}/>
-                        <TextInput style={globalStyles.input_field}
-                                   placeholder={userEmail}
-                                   value={userEmail}
-                                   onChangeText={handleEmailChange}/>
-                        <TextInput style={globalStyles.input_field}
-                                   placeholder={userAddress}
-                                   value={userAddress}
-                                   onChangeText={handleAddressChange}/>
-                        <TextInput style={globalStyles.input_field}
-                                   placeholder={userPhone}
-                                   value={userPhone}
-                                   onChangeText={handlePhoneChange}/>
-                        <TextInput style={globalStyles.input_field}
-                                   placeholder={userPassword}
-                                   value={userPassword}
-                                   onChangeText={handlePasswordChange}/>
-                        <MyProductsButton onPress={openUserProducts}/>
-                        <Text style={styles.text}>Просечен рејтинг:</Text>
-                        <StarRating rating={calculateRating} isDisabled={true}/>
-                    </View>
-                </ScrollView>
-            </ImageBackground>
-        </KeyboardAvoidingView>
-    )
+            <AddressInput
+              value={address}
+              onChangeText={changeHandler.bind(null, "address")}
+              infoMessage={"Вашата адреса ќе биде видлива за регистрираните корисници на апликацијата!"}
+            />
+
+            <TextInput
+              style={globalStyles.input_field}
+              keyboardType="phone-pad"
+              placeholder="Телефон"
+              value={phone}
+              onChangeText={changeHandler.bind(null, "phone")}
+            />
+
+            <TextInput
+              style={globalStyles.input_field}
+              placeholder="Лозинка"
+              secureTextEntry={true}
+              value={""}
+              onChangeText={changeHandler.bind(null, "password")}
+            />
+            <MyProductsButton onPress={openUserProducts} />
+            <Text style={styles.text}>Просечен рејтинг:</Text>
+            <StarRating rating={calculateRating()} isDisabled={true} />
+          </View>
+        </ScrollView>
+      </ImageBackground>
+    </KeyboardAvoidingView>
+  );
 }
 
 const styles = StyleSheet.create({
-    two_buttons: {
-        paddingVertical: 20,
-        width: 250,
-        flexGrow: 1,
-        alignSelf: 'center',
-        justifyContent: 'space-between',
-        flexDirection: 'row'
-    },
-    text: {
-        alignSelf: 'center',
-        fontSize: 20,
-        color: 'white'
-    },
-})
+  two_buttons: {
+    paddingVertical: 20,
+    width: 250,
+    flexGrow: 1,
+    alignSelf: "center",
+    justifyContent: "space-between",
+    flexDirection: "row",
+  },
+  text: {
+    alignSelf: "center",
+    fontSize: 20,
+    color: "white",
+  },
+});
