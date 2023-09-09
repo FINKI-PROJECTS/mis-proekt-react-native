@@ -4,14 +4,14 @@ import globalStyles from "../../assets/css/globalStyles";
 import { useNavigation } from "expo-router";
 interface IProps {
   title: string;
-  source: string;
+  source: any;
 }
 export default function BackButton({ title, source }: IProps) {
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity style={[globalStyles.back_button, globalStyles.shadow]} onPress={() => navigation.goBack()}>
-      <Image source={{ uri: source }} style={styles.backIcon} />
+      <Image source={source} style={styles.backIcon} />
       <Text style={[globalStyles.text_white, styles.title]}>{title}</Text>
     </TouchableOpacity>
   );

@@ -44,7 +44,7 @@ export default function UserProfile({ name, surname, email, address, phone }: Om
     <KeyboardAvoidingView
       style={globalStyles.background_transparent}
       behavior={Platform.OS === "ios" ? "padding" : "height"}>
-      <Navbar user={"user1"} />
+      <Navbar />
       <ImageBackground source={require("../../assets/images/background.png")} style={globalStyles.background}>
         <ScrollView>
           <Text style={[globalStyles.wide_title]}>МОЈ ПРОФИЛ</Text>
@@ -93,6 +93,7 @@ export default function UserProfile({ name, surname, email, address, phone }: Om
               value={""}
               onChangeText={changeHandler.bind(null, "password")}
             />
+            {/* <Button title="Зачувај" onPress={() => {}} /> */}
             <MyProductsButton onPress={openUserProducts} />
             <Text style={styles.text}>Просечен рејтинг:</Text>
             <StarRating rating={calculateRating()} isDisabled={true} />

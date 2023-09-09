@@ -3,9 +3,15 @@ import { ImageBackground, StyleSheet } from "react-native";
 import { Text, View } from "../../components/Themed";
 import globalStyles from "../../assets/css/globalStyles";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
+import { useAuth } from "../services/context/AuthContext";
+import Categories from "../pages/categories";
 
 // TODO this page is only shown if the user is not logged in
 export default function UnathorizedScreen() {
+  const { user } = useAuth();
+  if (user) {
+    return <Categories />;
+  }
   return (
     <ImageBackground source={require("../../assets/images/background.png")} style={globalStyles.background}>
       <View style={styles.container}>

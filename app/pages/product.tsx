@@ -14,11 +14,11 @@ import BackButton from "../../components/buttons/BackButton";
 import ContactFooter from "../../components/ContactFooter";
 import { IProduct } from "../interfaces/types";
 
-export default function Product({ product }: { product: IProduct }) {
+export default function Products({ product }: { product: IProduct }) {
   return (
     <View style={globalStyles.background_transparent}>
       {/*TODO if there is a user logged in, get the userId*/}
-      <Navbar user={"user1"} />
+      <Navbar />
       <ImageBackground source={require("../../assets/images/background.png")} style={globalStyles.background}>
         <ScrollView>
           <BackButton title={"Назад"} source={require("../../assets/images/back-icon.png")} />

@@ -19,6 +19,7 @@ import AddressInput from "../../components/AddressInput";
 import BackButton from "../../components/buttons/BackButton";
 import { useNavigation } from "expo-router";
 import { IRegister } from "../interfaces/types";
+import { useAuth } from "../services/context/AuthContext";
 
 const initialState = {
   selectedImage: "",
@@ -32,6 +33,7 @@ const initialState = {
 
 export default function RegisterScreen() {
   const [data, setData] = useState<IRegister>({ ...initialState });
+  const { signUp } = useAuth();
 
   const changeHandler = (name: string, value: string) => {
     setData((prev) => ({ ...prev, [name]: value }));
@@ -62,7 +64,7 @@ export default function RegisterScreen() {
   //TODO Save user in firebase
   // TODO Add validations
   const handleRegister = () => {
-    console.log(data);
+    signUp(data);
     navigator.navigate("pages/login" as never);
   };
 

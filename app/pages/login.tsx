@@ -15,12 +15,13 @@ import SecondaryButton from "../../components/buttons/SecondaryButton";
 import { useNavigation } from "expo-router";
 import BackButton from "../../components/buttons/BackButton";
 import { ILogin } from "../interfaces/types";
+import { useAuth } from "../services/context/AuthContext";
 
 const initialState = { email: "", password: "" };
 
 export default function LoginScreen() {
   const [data, setData] = useState<ILogin>({ ...initialState });
-
+  const { signIn } = useAuth();
   const navigation = useNavigation();
 
   // Function to handle input changes
@@ -32,6 +33,7 @@ export default function LoginScreen() {
   const handleLogin = () => {
     // Do something with the input value, e.g., submit it to a server
     // TODO handle validation & firebase check
+    signIn(data);
     const name = "pages/categories";
     navigation.navigate(name as never);
   };
