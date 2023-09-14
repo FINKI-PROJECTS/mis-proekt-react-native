@@ -34,17 +34,19 @@ export default function LoginScreen() {
     // Do something with the input value, e.g., submit it to a server
     // TODO handle validation & firebase check
     signIn(data);
-    const name = "pages/categories";
-    navigation.navigate(name as never);
+    navigation.navigate("index" as never);
   };
 
+  const handleBack = () => {
+    navigation.navigate("index" as never);
+  };
   return (
     <KeyboardAvoidingView
       style={globalStyles.background_transparent}
       behavior={Platform.OS === "ios" ? "padding" : "height"}>
       <ImageBackground source={require("../../assets/images/background.png")} style={globalStyles.background}>
         <ScrollView contentContainerStyle={globalStyles.scroll_view}>
-          <BackButton title={"Назад"} source={require("../../assets/images/back-icon.png")} />
+          <BackButton title={"Назад"} source={require("../../assets/images/back-icon.png")} goBack={handleBack} />
           <View style={globalStyles.container}>
             <Image source={require("../../assets/images/simple-logo.png")} style={globalStyles.simple_logo} />
             <Text style={globalStyles.title}>Најави се</Text>

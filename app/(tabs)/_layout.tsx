@@ -2,10 +2,6 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Link, Tabs } from "expo-router";
 import { Pressable, useColorScheme } from "react-native";
 import Colors from "../../constants/Colors";
-import { createTestData } from "../services/testService";
-import HeaderIcon from "../../components/HeaderIcon";
-import { AuthProvider } from "../services/context/AuthContext";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 import Navbar from "../../components/Navbar";
 
 interface ITabBarIconProps {

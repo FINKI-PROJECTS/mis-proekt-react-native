@@ -64,17 +64,48 @@ export default function RegisterScreen() {
   //TODO Save user in firebase
   // TODO Add validations
   const handleRegister = () => {
+    if (!data.selectedImage) {
+      alert("Ве молиме изберете слика!");
+      return;
+    }
+    if (!data.name) {
+      alert("Ве молиме внесете име!");
+      return;
+    }
+    if (!data.surname) {
+      alert("Ве молиме внесете презиме!");
+      return;
+    }
+    if (!data.email) {
+      alert("Ве молиме внесете емаил!");
+      return;
+    }
+    if (!data.address) {
+      alert("Ве молиме внесете адреса!");
+      return;
+    }
+    if (!data.phone) {
+      alert("Ве молиме внесете телефон!");
+      return;
+    }
+    if (!data.password) {
+      alert("Ве молиме внесете лозинка!");
+      return;
+    }
     signUp(data);
     navigator.navigate("pages/login" as never);
   };
 
+  const handleBack = () => {
+    navigator.navigate("index" as never);
+  };
   return (
     <KeyboardAvoidingView
       style={globalStyles.background_transparent}
       behavior={Platform.OS === "ios" ? "padding" : "height"}>
       <ImageBackground source={require("../../assets/images/background.png")} style={globalStyles.background}>
         <ScrollView contentContainerStyle={globalStyles.scroll_view}>
-          <BackButton title={"Назад"} source={require("../../assets/images/back-icon.png")} />
+          <BackButton title={"Назад"} source={require("../../assets/images/back-icon.png")} goBack={handleBack} />
           <View style={globalStyles.container}>
             <Image source={require("../../assets/images/simple-logo.png")} style={globalStyles.simple_logo} />
             <Text style={globalStyles.title}>Регистрирај се</Text>

@@ -5,12 +5,15 @@ import { useNavigation } from "expo-router";
 interface IProps {
   title: string;
   source: any;
+  goBack?: () => void;
 }
-export default function BackButton({ title, source }: IProps) {
+export default function BackButton({ title, source, goBack }: IProps) {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity style={[globalStyles.back_button, globalStyles.shadow]} onPress={() => navigation.goBack()}>
+    <TouchableOpacity
+      style={[globalStyles.back_button, globalStyles.shadow]}
+      onPress={goBack ? goBack : () => navigation.goBack()}>
       <Image source={source} style={styles.backIcon} />
       <Text style={[globalStyles.text_white, styles.title]}>{title}</Text>
     </TouchableOpacity>

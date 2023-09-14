@@ -7,7 +7,7 @@ import { useAuth } from "../app/services/context/AuthContext";
 
 export default function Navbar() {
   const navigation = useNavigation();
-  const { user } = useAuth();
+  const { user, userData } = useAuth();
   const handleOpenProfile = () => {
     //TODO take information about user and navigate to profile page
     //setUserId(user.userId);
@@ -21,7 +21,12 @@ export default function Navbar() {
         {/*TODO When user is logged in, the user image should lead to his profile, when not, to login page*/}
         {user && (
           <TouchableOpacity onPress={handleOpenProfile}>
-            <Image source={require("../assets/images/user_photo.png")} style={styles.logo} />
+            <Image
+              source={
+                userData?.selectedImage ? { uri: userData.selectedImage } : require("../assets/images/user_photo.png")
+              }
+              style={styles.logo}
+            />
           </TouchableOpacity>
         )}
       </View>
@@ -48,7 +53,8 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   logo: {
-    height: 36,
-    width: 38,
+    height: 24,
+    width: 28,
+    borderRadius: 100,
   },
 });
