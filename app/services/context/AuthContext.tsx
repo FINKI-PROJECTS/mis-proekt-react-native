@@ -62,16 +62,23 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   const signUp = async (data: IRegister) => {
-    const { email, password, ...additionalData } = data;
-    const response = await createUserWithEmailAndPassword(auth, email, password);
-    const uid = response.user?.uid;
+    try {
+      const { email, password, ...additionalData } = data;
+      const response = await createUserWithEmailAndPassword(auth, email, password);
+      const uid = response.user?.uid;
 
-    if (uid) {
+      if (!uid) {
+        throw new Error("Failed to get UID after registration.");
+      }
+
       const profileImageUrl = await uploadImageAndGetURL(additionalData.selectedImage, uid);
       additionalData.selectedImage = profileImageUrl;
       const db = getDatabase();
       const userRef = ref(db, "users/" + uid);
       await set(userRef, additionalData);
+    } catch (error: any) {
+      console.error("Error in signUp: ", error.message);
+      throw error; // Propagate the error so it can be caught outside.
     }
   };
 

@@ -61,9 +61,7 @@ export default function RegisterScreen() {
     }
   };
 
-  //TODO Save user in firebase
-  // TODO Add validations
-  const handleRegister = () => {
+  const handleRegister = async () => {
     if (!data.selectedImage) {
       alert("Ве молиме изберете слика!");
       return;
@@ -92,8 +90,14 @@ export default function RegisterScreen() {
       alert("Ве молиме внесете лозинка!");
       return;
     }
-    signUp(data);
-    navigator.navigate("pages/login" as never);
+    try {
+      await signUp(data);
+      navigator.navigate("pages/login" as never); // note: the "as never" type casting seems odd and may not be necessary.
+    } catch (error: any) {
+      const replacedMessage = error?.message?.replace(/^Firebase: | \(auth\/[^\)]+\)/g, "");
+
+      alert(replacedMessage); // You might want to be more descriptive based on the error.
+    }
   };
 
   const handleBack = () => {
