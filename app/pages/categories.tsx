@@ -12,29 +12,38 @@ import {
 import Navbar from "../../components/Navbar";
 import globalStyles from "../../assets/css/globalStyles";
 import CategoryButton from "../../components/buttons/CategoryButton";
-import BackButton from "../../components/buttons/BackButton";
 import { useNavigation } from "expo-router";
+import BackButton from "../../components/buttons/BackButton";
 
+interface IType {
+  screen: string;
+}
 export default function Categories() {
   const navigator = useNavigation();
 
-  // TODO navigate to the list of products from the specific category
-  const handleNavigation = () => {
-    navigator.navigate("pages/list-of-products" as never);
+  const handleNavigation = (name: string) => {
+    navigator.navigate({
+      name: "index",
+      params: { screen: "pages/list-of-products", id: name },
+    } as never);
   };
 
+  const handleBack = () => {
+    navigator.navigate("index" as never);
+  };
   return (
     <View style={globalStyles.background_transparent}>
       <ImageBackground source={require("../../assets/images/background.png")} style={globalStyles.background}>
         <ScrollView>
+          <BackButton title={"Назад"} source={require("../../assets/images/back-icon.png")} goBack={handleBack} />
           <View style={[globalStyles.container, globalStyles.shadow]}>
             <Text style={globalStyles.title}>Категории</Text>
-            <CategoryButton title={"Блузи"} onPress={handleNavigation} />
-            <CategoryButton title={"Панталони"} onPress={handleNavigation} />
-            <CategoryButton title={"Сукњи"} onPress={handleNavigation} />
-            <CategoryButton title={"Маици"} onPress={handleNavigation} />
-            <CategoryButton title={"Капи"} onPress={handleNavigation} />
-            <CategoryButton title={"Фустани"} onPress={handleNavigation} />
+            <CategoryButton title={"Блузи"} onPress={() => handleNavigation("Блузи")} />
+            <CategoryButton title={"Панталони"} onPress={() => handleNavigation("Панталони")} />
+            <CategoryButton title={"Сукњи"} onPress={() => handleNavigation("Сукњи")} />
+            <CategoryButton title={"Маици"} onPress={() => handleNavigation("Маици")} />
+            <CategoryButton title={"Капи"} onPress={() => handleNavigation("Капи")} />
+            <CategoryButton title={"Фустани"} onPress={() => handleNavigation("Фустани")} />
             {/*TODO list other categories*/}
             <TouchableOpacity style={styles.arrow}>
               <Image source={require("../../assets/images/arrow-down.png")} style={styles.arrow} />

@@ -5,11 +5,25 @@ import globalStyles from "../../assets/css/globalStyles";
 import PrimaryButton from "../../components/buttons/PrimaryButton";
 import { useAuth } from "../services/context/AuthContext";
 import Categories from "../pages/categories";
+import { useRoute } from "@react-navigation/native";
+import ListOfProducts from "../pages/list-of-products";
+import LoginScreen from "../pages/login";
+import RegisterScreen from "../pages/register";
 
+interface IType {
+  screen: string;
+  id: string;
+}
 // TODO this page is only shown if the user is not logged in
 export default function UnathorizedScreen() {
+  const route = useRoute();
+  const params = route.params as IType;
+  if (params?.screen === "pages/list-of-products" && params?.id) {
+    return <ListOfProducts name={params.id} />;
+  }
+
   const { user } = useAuth();
-  if (user) {
+  if (user || params?.screen === "pages/categories") {
     return <Categories />;
   }
   return (

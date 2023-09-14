@@ -10,11 +10,14 @@ interface IProps {
 export default function PrimaryButton({ title, name }: IProps) {
   const navigation = useNavigation();
 
+  const handleNavigation = (name: string) => {
+    navigation.navigate(name as never);
+  };
   return (
     <TouchableOpacity
       style={[globalStyles.primary_button, globalStyles.shadow]}
       onPress={() => {
-        navigation.navigate(name as never);
+        handleNavigation(name);
       }}>
       <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity>
