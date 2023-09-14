@@ -3,14 +3,11 @@ import { Image, StyleSheet, Text, TouchableOpacity, StatusBar, SafeAreaView } fr
 import { View } from "./Themed";
 import globalStyles from "../assets/css/globalStyles";
 import { useNavigation } from "expo-router";
+import { useAuth } from "../app/services/context/AuthContext";
 
-interface IProps {
-  user: string;
-}
-export default function Navbar({ user }: IProps) {
-  const [userId, setUserId] = useState("");
+export default function Navbar() {
   const navigation = useNavigation();
-
+  const { user, userData } = useAuth();
   const handleOpenProfile = () => {
     //TODO take information about user and navigate to profile page
     //setUserId(user.userId);
@@ -22,9 +19,16 @@ export default function Navbar({ user }: IProps) {
       <View style={[styles.navContainer, globalStyles.background_blue]}>
         <Image source={require("../assets/images/logo_white.png")} style={styles.image} />
         {/*TODO When user is logged in, the user image should lead to his profile, when not, to login page*/}
-        <TouchableOpacity onPress={handleOpenProfile}>
-          <Image source={require("../assets/images/user_photo.png")} style={styles.logo} />
-        </TouchableOpacity>
+        {user && (
+          <TouchableOpacity onPress={handleOpenProfile}>
+            <Image
+              source={
+                userData?.selectedImage ? { uri: userData.selectedImage } : require("../assets/images/user_photo.png")
+              }
+              style={styles.logo}
+            />
+          </TouchableOpacity>
+        )}
       </View>
     </SafeAreaView>
   );
@@ -49,7 +53,8 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   logo: {
-    height: 36,
-    width: 38,
+    height: 24,
+    width: 28,
+    borderRadius: 100,
   },
 });

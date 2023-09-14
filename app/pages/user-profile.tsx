@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
 } from "react-native";
 import globalStyles from "../../assets/css/globalStyles";
@@ -17,6 +18,7 @@ import MyProductsButton from "../../components/buttons/MyProductsButton";
 import { useNavigation } from "expo-router";
 import { IRegister } from "../interfaces/types";
 import AddressInput from "../../components/AddressInput";
+import { useAuth } from "../services/context/AuthContext";
 interface IProps {
   userName: string;
   userSurname: string;
@@ -27,7 +29,7 @@ interface IProps {
 }
 export default function UserProfile({ name, surname, email, address, phone }: Omit<IRegister, "password">) {
   const navigator = useNavigation();
-
+  const { signOut } = useAuth();
   const changeHandler = (name: string, value: string) => {};
 
   // TODO take the list of ratings per user and calculate the average
@@ -44,7 +46,7 @@ export default function UserProfile({ name, surname, email, address, phone }: Om
     <KeyboardAvoidingView
       style={globalStyles.background_transparent}
       behavior={Platform.OS === "ios" ? "padding" : "height"}>
-      <Navbar user={"user1"} />
+      <Navbar />
       <ImageBackground source={require("../../assets/images/background.png")} style={globalStyles.background}>
         <ScrollView>
           <Text style={[globalStyles.wide_title]}>МОЈ ПРОФИЛ</Text>
@@ -93,7 +95,16 @@ export default function UserProfile({ name, surname, email, address, phone }: Om
               value={""}
               onChangeText={changeHandler.bind(null, "password")}
             />
+            {/* <Button title="Зачувај" onPress={() => {}} /> */}
             <MyProductsButton onPress={openUserProducts} />
+            <TouchableOpacity
+              style={[styles.button, globalStyles.shadow]}
+              onPress={() => {
+                signOut();
+                navigator.navigate("pages/login" as never);
+              }}>
+              <Text style={[globalStyles.text_blue, styles.textBtn]}>Одјависе</Text>
+            </TouchableOpacity>
             <Text style={styles.text}>Просечен рејтинг:</Text>
             <StarRating rating={calculateRating()} isDisabled={true} />
           </View>
@@ -116,5 +127,22 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     fontSize: 20,
     color: "white",
+  },
+  textBtn: {
+    alignSelf: "center",
+    fontSize: 18,
+  },
+  button: {
+    width: 150,
+    height: 40,
+    marginVertical: 20,
+    paddingHorizontal: 20,
+    alignSelf: "center",
+    alignItems: "center",
+    backgroundColor: "white",
+    borderRadius: 20,
+    flexGrow: 1,
+    justifyContent: "space-between",
+    flexDirection: "row",
   },
 });
