@@ -10,12 +10,13 @@ import {
 
 import { Text, View } from "../../components/Themed";
 import globalStyles from "../../assets/css/globalStyles";
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import SecondaryButton from "../../components/buttons/SecondaryButton";
 import { useNavigation } from "expo-router";
 import BackButton from "../../components/buttons/BackButton";
 import { ILogin } from "../interfaces/types";
 import { useAuth } from "../services/context/AuthContext";
+import { AuthError, AuthErrorCodes } from "firebase/auth";
 
 const initialState = { email: "", password: "" };
 
@@ -30,11 +31,18 @@ export default function LoginScreen() {
   };
 
   // Function to handle form submission
-  const handleLogin = () => {
-    // Do something with the input value, e.g., submit it to a server
-    // TODO handle validation & firebase check
-    signIn(data);
-    navigation.navigate("index" as never);
+  const handleLogin = async () => {
+    try {
+      await signIn(data);
+      navigation.navigate("index" as never);
+    } catch (error: any) {
+      // Check if the error is an instance of AuthError
+      if (error.code === "auth/wrong-password" || error.code === "auth/user-not-found") {
+        alert("Wrong credentials or user does not exist.");
+      } else {
+        alert("An error occurred. Please try again.");
+      }
+    }
   };
 
   const handleBack = () => {
