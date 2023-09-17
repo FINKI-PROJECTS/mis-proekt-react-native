@@ -19,12 +19,21 @@ export default function Products({ product }: { product: IProduct }) {
     <View style={globalStyles.background_transparent}>
       {/*TODO if there is a user logged in, get the userId*/}
       <Navbar />
-      <ImageBackground source={require("../../assets/images/background.png")} style={globalStyles.background}>
+      <ImageBackground
+        source={require("../../assets/images/background.png")}
+        style={globalStyles.background}
+      >
         <ScrollView>
-          <BackButton title={"Назад"} source={require("../../assets/images/back-icon.png")} />
+          <BackButton
+            title={"Назад"}
+            source={require("../../assets/images/back-icon.png")}
+          />
           <View style={[globalStyles.container, globalStyles.shadow]}>
             <View style={globalStyles.white_container}>
-              <Image source={require("../../assets/images/example-cloth.png")} style={globalStyles.cloth_image} />
+              <Image
+                source={require("../../assets/images/example-cloth.png")}
+                style={globalStyles.cloth_image}
+              />
               <View style={globalStyles.cloth_description}>
                 <View>
                   <Text style={styles.text}>Категорија</Text>
@@ -38,18 +47,20 @@ export default function Products({ product }: { product: IProduct }) {
                   <Text style={styles.text}>{product.size}</Text>
                   <Text style={styles.text}>{product.brand}</Text>
                   <Text style={styles.text}>{product.seller?.name}</Text>
-                  <Text style={styles.text}>{product.location}</Text>
+                  <Text style={styles.text}>{product.seller?.location}</Text>
                 </View>
               </View>
             </View>
             <View style={styles.price}>
-              <Text style={[globalStyles.text_white, styles.text]}>{product.price} ден.</Text>
+              <Text style={[globalStyles.text_white, styles.text]}>
+                {product.price} ден.
+              </Text>
             </View>
           </View>
         </ScrollView>
       </ImageBackground>
       {/*TODO The footer should be visible only if a user is logged in*/}
-      <ContactFooter sellerId={product.seller.id} />
+      <ContactFooter sellerId={product.seller?.id} />
     </View>
   );
 }

@@ -2,7 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import globalStyles from "../assets/css/globalStyles";
 import { useNavigation } from "expo-router";
 interface IProps {
-  sellerId: string;
+  sellerId: string | undefined;
 }
 
 export default function ContactFooter({ sellerId }: IProps) {
@@ -14,7 +14,10 @@ export default function ContactFooter({ sellerId }: IProps) {
   };
 
   return (
-    <TouchableOpacity style={[styles.container, globalStyles.background_blue]} onPress={handleSeller}>
+    <TouchableOpacity
+      style={[styles.container, globalStyles.background_blue]}
+      onPress={handleSeller}
+    >
       <Text style={styles.text}>Контактирај продавач</Text>
     </TouchableOpacity>
   );
