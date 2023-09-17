@@ -18,12 +18,13 @@ import ImageInput from "../../components/ImageInput";
 import AddressInput from "../../components/AddressInput";
 import BackButton from "../../components/buttons/BackButton";
 import { useNavigation } from "expo-router";
-import { IProduct, IRegister } from "../interfaces/types";
-import { useAuth } from "../services/context/AuthContext";
+import { IProduct, IRegister, categories, sizes } from "../interfaces/types";
+import { Picker } from "@react-native-picker/picker";
+import ColorPicker from "react-native-wheel-color-picker";
 
 const initialState = {
-  category: "",
-  size: "",
+  category: "Друго",
+  size: "XS",
   brand: "",
   color: "white",
   price: "",
@@ -89,6 +90,7 @@ export default function CreateEditProduct() {
   const handleBack = () => {
     navigator.navigate("index" as never);
   };
+
   return (
     <KeyboardAvoidingView
       style={globalStyles.background_transparent}
@@ -101,19 +103,23 @@ export default function CreateEditProduct() {
 
             <ImageInput onPress={handleImagePress} imageUri={data.image} />
 
-            <TextInput
+            <Picker
+              selectedValue={data.category}
               style={globalStyles.input_field}
-              placeholder="Категорија"
-              value={data.category}
-              onChangeText={changeHandler.bind(null, "category")}
-            />
+              onValueChange={changeHandler.bind(null, "category")}>
+              {categories.map((category) => (
+                <Picker.Item key={category} label={category} value={category} />
+              ))}
+            </Picker>
 
-            <TextInput
+            <Picker
+              selectedValue={data.size}
               style={globalStyles.input_field}
-              placeholder="Големина"
-              value={data.size}
-              onChangeText={changeHandler.bind(null, "size")}
-            />
+              onValueChange={changeHandler.bind(null, "size")}>
+              {sizes.map((size) => (
+                <Picker.Item key={size} label={size} value={size} />
+              ))}
+            </Picker>
 
             <AddressInput
               value={data.address}
@@ -127,16 +133,34 @@ export default function CreateEditProduct() {
               value={data.brand}
               onChangeText={changeHandler.bind(null, "brand")}
             />
-            <TextInput
-              style={globalStyles.input_field}
-              placeholder="Боја"
-              value={data.color}
-              onChangeText={changeHandler.bind(null, "color")}
+
+            <ColorPicker
+              color={data.color}
+              onColorChange={(color) => changeHandler("color", color)}
+              thumbSize={10}
+              sliderSize={10}
+              swatches={false}
+              sliderHidden={true}
+              noSnap={true}
+              row={false}
             />
+            <View
+              style={{
+                flex: 1,
+                backgroundColor: "transparent",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "row",
+              }}>
+              <Text>Боја: </Text>
+              <View style={{ height: 20, backgroundColor: data.color, width: 100 }} />
+            </View>
+
             <TextInput
               style={globalStyles.input_field}
               placeholder="Цена"
               value={data.price}
+              keyboardType="numeric"
               onChangeText={changeHandler.bind(null, "price")}
             />
             <SecondaryButton title="Додади" onPress={handleAddNew} />
