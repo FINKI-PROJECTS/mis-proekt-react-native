@@ -14,6 +14,8 @@ import globalStyles from "../../assets/css/globalStyles";
 import CategoryButton from "../../components/buttons/CategoryButton";
 import { useNavigation } from "expo-router";
 import BackButton from "../../components/buttons/BackButton";
+import { categories } from "../interfaces/types";
+import { Dimensions } from "react-native";
 
 interface IType {
   screen: string;
@@ -31,25 +33,37 @@ export default function Categories() {
   const handleBack = () => {
     navigator.navigate("index" as never);
   };
+
+  const windowHeight = Dimensions.get("window").height;
+  const desiredHeight = windowHeight * 0.6;
+
   return (
     <View style={globalStyles.background_transparent}>
-      <ImageBackground source={require("../../assets/images/background.png")} style={globalStyles.background}>
-        <ScrollView>
-          <BackButton title={"Назад"} source={require("../../assets/images/back-icon.png")} goBack={handleBack} />
-          <View style={[globalStyles.container, globalStyles.shadow]}>
-            <Text style={globalStyles.title}>Категории</Text>
-            <CategoryButton title={"Блузи"} onPress={() => handleNavigation("Блузи")} />
-            <CategoryButton title={"Панталони"} onPress={() => handleNavigation("Панталони")} />
-            <CategoryButton title={"Сукњи"} onPress={() => handleNavigation("Сукњи")} />
-            <CategoryButton title={"Маици"} onPress={() => handleNavigation("Маици")} />
-            <CategoryButton title={"Капи"} onPress={() => handleNavigation("Капи")} />
-            <CategoryButton title={"Фустани"} onPress={() => handleNavigation("Фустани")} />
-            {/*TODO list other categories*/}
-            <TouchableOpacity style={styles.arrow}>
-              <Image source={require("../../assets/images/arrow-down.png")} style={styles.arrow} />
-            </TouchableOpacity>
-          </View>
-        </ScrollView>
+      <ImageBackground
+        source={require("../../assets/images/background.png")}
+        style={globalStyles.background}
+      >
+        <BackButton
+          title={"Назад"}
+          source={require("../../assets/images/back-icon.png")}
+          goBack={handleBack}
+        />
+        <View style={[globalStyles.container, globalStyles.shadow]}>
+          <Text style={globalStyles.title}>Категории</Text>
+          <ScrollView
+            horizontal={false}
+            showsVerticalScrollIndicator={true}
+            style={{ height: desiredHeight }}
+          >
+            {categories.map((category) => (
+              <CategoryButton
+                key={category}
+                title={category}
+                onPress={() => handleNavigation(category)}
+              />
+            ))}
+          </ScrollView>
+        </View>
       </ImageBackground>
     </View>
   );
