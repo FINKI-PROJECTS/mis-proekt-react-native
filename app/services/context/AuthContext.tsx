@@ -63,8 +63,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const signUp = async (data: IRegister) => {
     try {
-      const { email, password, ...additionalData } = data;
-      const response = await createUserWithEmailAndPassword(auth, email, password);
+      const { password, ...additionalData } = data;
+      const response = await createUserWithEmailAndPassword(auth, additionalData.email, password);
       const uid = response.user?.uid;
 
       if (!uid) {
@@ -73,6 +73,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       const profileImageUrl = await uploadImageAndGetURL(additionalData.selectedImage, uid);
       additionalData.selectedImage = profileImageUrl;
+      additionalData.email = additionalData.email;
       const db = getDatabase();
       const userRef = ref(db, "users/" + uid);
       await set(userRef, additionalData);

@@ -12,7 +12,7 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import { Text, View } from "../../components/Themed";
 import globalStyles from "../../assets/css/globalStyles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SecondaryButton from "../../components/buttons/SecondaryButton";
 import ImageInput from "../../components/ImageInput";
 import AddressInput from "../../components/AddressInput";
@@ -21,6 +21,9 @@ import { useNavigation } from "expo-router";
 import { IProduct, IRegister, categories, sizes } from "../interfaces/types";
 import { Picker } from "@react-native-picker/picker";
 import ColorPicker from "react-native-wheel-color-picker";
+import { useAuth } from "../services/context/AuthContext";
+import { getDatabase, ref, set, push } from "firebase/database";
+import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const initialState = {
   category: "Друго",
@@ -35,11 +38,12 @@ const initialState = {
 export default function CreateEditProduct() {
   const [data, setData] = useState<IProduct>({ ...initialState });
 
+  const navigator = useNavigation();
+  const { user } = useAuth();
+
   const changeHandler = (name: string, value: string) => {
     setData((prev) => ({ ...prev, [name]: value }));
   };
-
-  const navigator = useNavigation();
 
   // Functions to handle input changes
   const handleImagePress = async () => {
@@ -54,10 +58,44 @@ export default function CreateEditProduct() {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       quality: 1,
     });
-
+    console.log(pickerResult);
     if (!pickerResult.canceled) {
       const imageUri = pickerResult.assets[0].uri;
-      changeHandler("selectedImage", imageUri);
+      changeHandler("image", imageUri);
+    }
+  };
+
+  const uploadImageAndGetURL = async (uri: string) => {
+    const storage = getStorage();
+
+    // Generating a unique filename for each image.
+    // This uses a combination of productId and a timestamp.
+    const uniqueImageName = `${Math.ceil(Math.random() * 1000000)}_${Date.now()}.jpg`;
+
+    const imageRef = storageRef(storage, `productImages/${uniqueImageName}`);
+
+    let blob: Blob;
+
+    try {
+      const response = await fetch(uri);
+      blob = await response.blob();
+    } catch (error) {
+      console.error("Error fetching the image:", error);
+      throw new Error("Failed to fetch the image.");
+    }
+
+    // Add metadata if required, for instance setting content type.
+    const metadata = {
+      contentType: "image/jpeg",
+    };
+
+    try {
+      await uploadBytes(imageRef, blob, metadata);
+      const downloadURL = await getDownloadURL(imageRef);
+      return downloadURL;
+    } catch (error) {
+      console.error("Error uploading the image to Firebase:", error);
+      throw new Error("Failed to upload the image.");
     }
   };
 
@@ -83,8 +121,21 @@ export default function CreateEditProduct() {
       return;
     }
 
-    // await signUp(data);
-    // navigator.navigate("pages/login" as never); // note: the "as never" type casting seems odd and may not be necessary.
+    if (!user) {
+      alert("User not logged in");
+      return;
+    }
+    try {
+      const database = getDatabase();
+      const productImageUrl = await uploadImageAndGetURL(data.image);
+      const newProduct = { ...data, userId: user.uid, image: productImageUrl };
+      const productsRef = ref(database, "products/");
+      const newProductRef = push(productsRef);
+      await set(newProductRef, newProduct);
+      navigator.navigate("index" as never);
+    } catch (error: any) {
+      alert(error.message);
+    }
   };
 
   const handleBack = () => {

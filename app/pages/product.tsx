@@ -12,19 +12,56 @@ import globalStyles from "../../assets/css/globalStyles";
 import Navbar from "../../components/Navbar";
 import BackButton from "../../components/buttons/BackButton";
 import ContactFooter from "../../components/ContactFooter";
-import { IProduct } from "../interfaces/types";
+import { IProduct, IRegister } from "../interfaces/types";
+import { useNavigation } from "expo-router";
+import { getDatabase, ref, get } from "firebase/database";
+import { useEffect, useState } from "react";
 
-export default function Products({ product }: { product: IProduct }) {
+export default function Product({ product }: { product: IProduct }) {
+  const [seller, setSeller] = useState<IRegister>();
+  const fetchUserData = async (userId: string) => {
+    const db = getDatabase();
+    const userRef = ref(db, `users/${userId}`);
+
+    // Fetch the user data
+    const snapshot = await get(userRef);
+
+    // If the user data exists, return it. Otherwise, return null or throw an error.
+    if (snapshot.exists()) {
+      return snapshot.val();
+    } else {
+      console.error(`User with ID ${userId} not found.`);
+      return null;
+    }
+  };
+  const navigator = useNavigation();
+  const goBack = () => {
+    navigator.navigate({
+      name: "index",
+      params: { screen: "pages/list-of-products", id: product.category },
+    } as never);
+  };
+
+  useEffect(() => {
+    const effect = async () => {
+      if (product.userId) {
+        const userData = await fetchUserData(product.userId);
+        if (userData) {
+          setSeller(userData);
+        }
+      }
+    };
+    effect();
+  }, [product]);
   return (
     <View style={globalStyles.background_transparent}>
       {/*TODO if there is a user logged in, get the userId*/}
-      <Navbar />
       <ImageBackground source={require("../../assets/images/background.png")} style={globalStyles.background}>
         <ScrollView>
-          <BackButton title={"Назад"} source={require("../../assets/images/back-icon.png")} />
+          <BackButton title={"Назад"} source={require("../../assets/images/back-icon.png")} goBack={goBack} />
           <View style={[globalStyles.container, globalStyles.shadow]}>
             <View style={globalStyles.white_container}>
-              <Image source={require("../../assets/images/example-cloth.png")} style={globalStyles.cloth_image} />
+              <Image source={{ uri: product.image }} style={globalStyles.cloth_image} />
               <View style={globalStyles.cloth_description}>
                 <View>
                   <Text style={styles.text}>Категорија</Text>
@@ -37,8 +74,8 @@ export default function Products({ product }: { product: IProduct }) {
                   <Text style={styles.text}>{product.category}</Text>
                   <Text style={styles.text}>{product.size}</Text>
                   <Text style={styles.text}>{product.brand}</Text>
-                  <Text style={styles.text}>{product.seller?.name}</Text>
-                  <Text style={styles.text}>{product.seller?.location}</Text>
+                  <Text style={styles.text}>{seller?.name}</Text>
+                  <Text style={styles.text}>{seller?.address}</Text>
                 </View>
               </View>
             </View>
@@ -49,7 +86,7 @@ export default function Products({ product }: { product: IProduct }) {
         </ScrollView>
       </ImageBackground>
       {/*TODO The footer should be visible only if a user is logged in*/}
-      <ContactFooter sellerId={product.seller?.id} />
+      {seller && <ContactFooter {...seller} />}
     </View>
   );
 }

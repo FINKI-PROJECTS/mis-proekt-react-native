@@ -9,15 +9,21 @@ import { useRoute } from "@react-navigation/native";
 import ListOfProducts from "../pages/list-of-products";
 import LoginScreen from "../pages/login";
 import RegisterScreen from "../pages/register";
+import Product from "../pages/product";
+import { IProduct } from "../interfaces/types";
 
 interface IType {
   screen: string;
   id: string;
+  product?: IProduct;
 }
 // TODO this page is only shown if the user is not logged in
 export default function UnathorizedScreen() {
   const route = useRoute();
   const params = route.params as IType;
+  if (params?.screen === "pages/list-of-products" && params?.id && params.product) {
+    return <Product product={params.product} />;
+  }
   if (params?.screen === "pages/list-of-products" && params?.id) {
     return <ListOfProducts name={params.id} />;
   }

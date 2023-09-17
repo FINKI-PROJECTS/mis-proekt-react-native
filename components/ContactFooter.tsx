@@ -1,21 +1,22 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import globalStyles from "../assets/css/globalStyles";
 import { useNavigation } from "expo-router";
-interface IProps {
-  sellerId: string | undefined;
-}
+import { IRegister } from "../app/interfaces/types";
 
-export default function ContactFooter({ sellerId }: IProps) {
+export default function ContactFooter(user: IRegister) {
   const navigation = useNavigation();
 
   const handleSeller = () => {
     //TODO open the page of the selected sellers cloth
-    navigation.navigate("pages/seller" as never);
+    navigation.navigate({
+      name: "three",
+      params: { screen: "pages/seller", user: user },
+    } as never);
   };
 
   return (
     <TouchableOpacity style={[styles.container, globalStyles.background_blue]} onPress={handleSeller}>
-      <Text style={styles.text}>Контактирај продавач</Text>
+      <Text style={styles.text}>Контактирај продавач: {user.name}</Text>
     </TouchableOpacity>
   );
 }

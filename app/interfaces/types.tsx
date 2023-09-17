@@ -14,17 +14,15 @@ export interface ILogin {
 }
 
 export interface IProduct {
+  id?: string;
   category: string;
   size: string;
   brand: string;
   color: string;
   image: string;
   address: string;
-  seller?: {
-    id: string;
-    name: string;
-    location: string;
-  };
+  userId?: string;
+  seller?: IRegister;
   price: string;
 }
 

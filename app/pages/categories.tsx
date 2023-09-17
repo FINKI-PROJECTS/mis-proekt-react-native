@@ -16,6 +16,7 @@ import { useNavigation } from "expo-router";
 import BackButton from "../../components/buttons/BackButton";
 import { categories } from "../interfaces/types";
 import { Dimensions } from "react-native";
+import { useAuth } from "../services/context/AuthContext";
 
 interface IType {
   screen: string;
@@ -36,11 +37,13 @@ export default function Categories() {
 
   const windowHeight = Dimensions.get("window").height;
   const desiredHeight = windowHeight * 0.6;
-
+  const { user } = useAuth();
   return (
     <View style={globalStyles.background_transparent}>
       <ImageBackground source={require("../../assets/images/background.png")} style={globalStyles.background}>
-        <BackButton title={"Назад"} source={require("../../assets/images/back-icon.png")} goBack={handleBack} />
+        {!user && (
+          <BackButton title={"Назад"} source={require("../../assets/images/back-icon.png")} goBack={handleBack} />
+        )}
         <View style={[globalStyles.container, globalStyles.shadow]}>
           <Text style={globalStyles.title}>Категории</Text>
           <ScrollView horizontal={false} showsVerticalScrollIndicator={true} style={{ height: desiredHeight }}>
