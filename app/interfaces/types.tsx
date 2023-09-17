@@ -14,6 +14,7 @@ export interface ILogin {
 }
 
 export interface IProduct {
+  id?: string;
   category: string;
   size: string;
   brand: string;
