@@ -28,7 +28,10 @@ const initialState = {
   name: "",
   surname: "",
   email: "",
-  address: "",
+  address: {
+    latitude: "",
+    longitude: ""
+  },
   phone: "",
   password: "",
 };
@@ -43,6 +46,16 @@ export default function RegisterScreen() {
     setData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const changeHandlerAddress = (key1: string, value1: string, key2: string, value2: string) => {
+    setData((prev) => ({
+      ...prev,
+      selectedAddress: {
+        [key1]: value1,
+        [key2]: value2,
+      },
+    }));
+  };
+
   const navigator = useNavigation();
 
   // Functions to handle input changes
@@ -52,6 +65,11 @@ export default function RegisterScreen() {
 
   const handleCapture = (imgUri: string) => {
     changeHandler("selectedImage", imgUri);
+  }
+
+  const handleLocation = (address: object) => {
+      changeHandlerAddress("latitude", address.latitude, "longitude", address.longitude)
+      alert("Успешно ја ажуриравте вашата локација");
   }
 
   const handleModalSelection = async (selectedSource: string) => {
@@ -103,7 +121,7 @@ export default function RegisterScreen() {
       return;
     }
     if (!data.address) {
-      alert("Ве молиме внесете адреса!");
+      alert("Ве молиме одберете адреса!");
       return;
     }
     if (!data.phone) {
@@ -165,7 +183,7 @@ export default function RegisterScreen() {
 
               <AddressInput
                 value={data.address}
-                onChangeText={changeHandler.bind(null, "address")}
+                onPress={handleLocation}
                 infoMessage={"Вашата адреса ќе биде видлива за регистрираните корисници на апликацијата!"}
               />
 
