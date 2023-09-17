@@ -3,7 +3,10 @@ export interface IRegister {
   name: string;
   surname: string;
   email: string;
-  address: string;
+  address: {
+    latitude: string,
+    longitude: string
+  };
   phone: string;
   password: string;
 }
@@ -20,7 +23,10 @@ export interface IProduct {
   brand: string;
   color: string;
   image: string;
-  address: string;
+  address: {
+    latitude: string,
+    longitude: string
+  };
   userId?: string;
   seller?: IRegister;
   price: string;

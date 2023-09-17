@@ -19,17 +19,11 @@ import { useNavigation } from "expo-router";
 import { IRegister } from "../interfaces/types";
 import AddressInput from "../../components/AddressInput";
 import { useAuth } from "../services/context/AuthContext";
-interface IProps {
-  userName: string;
-  userSurname: string;
-  userEmail: string;
-  userAddress: string;
-  userPhone: string;
-  userPassword: string;
-}
-export default function UserProfile({ name, surname, email, address, phone }: Omit<IRegister, "password">) {
+
+export default function UserProfile() {
   const navigator = useNavigation();
   const { signOut } = useAuth();
+  const {userData} = useAuth();
   const changeHandler = (name: string, value: string) => {};
 
   // TODO take the list of ratings per user and calculate the average
@@ -47,6 +41,7 @@ export default function UserProfile({ name, surname, email, address, phone }: Om
       style={globalStyles.background_transparent}
       behavior={Platform.OS === "ios" ? "padding" : "height"}>
       <ImageBackground source={require("../../assets/images/background.png")} style={globalStyles.background}>
+        <Navbar/>
         <ScrollView>
           <Text style={[globalStyles.wide_title]}>МОЈ ПРОФИЛ</Text>
           <BackButton title={"Назад"} source={require("../../assets/images/back-icon.png")} />
@@ -54,14 +49,16 @@ export default function UserProfile({ name, surname, email, address, phone }: Om
             <TextInput
               style={globalStyles.input_field}
               placeholder="Име"
-              value={name}
+              value={userData?.name}
+              editable={false}
               onChangeText={changeHandler.bind(null, "name")}
             />
 
             <TextInput
               style={globalStyles.input_field}
               placeholder="Презиме"
-              value={surname}
+              value={userData?.surname}
+              editable={false}
               onChangeText={changeHandler.bind(null, "surname")}
             />
 
@@ -69,31 +66,20 @@ export default function UserProfile({ name, surname, email, address, phone }: Om
               style={globalStyles.input_field}
               keyboardType="email-address"
               placeholder="Емаил"
-              value={email}
+              value={userData?.email}
+              editable={false}
               onChangeText={changeHandler.bind(null, "email")}
-            />
-
-            <AddressInput
-              value={address}
-              onChangeText={changeHandler.bind(null, "address")}
-              infoMessage={"Вашата адреса ќе биде видлива за регистрираните корисници на апликацијата!"}
             />
 
             <TextInput
               style={globalStyles.input_field}
               keyboardType="phone-pad"
               placeholder="Телефон"
-              value={phone}
+              value={userData?.phone}
+              editable={false}
               onChangeText={changeHandler.bind(null, "phone")}
             />
 
-            <TextInput
-              style={globalStyles.input_field}
-              placeholder="Лозинка"
-              secureTextEntry={true}
-              value={""}
-              onChangeText={changeHandler.bind(null, "password")}
-            />
             {/* <Button title="Зачувај" onPress={() => {}} /> */}
             <MyProductsButton onPress={openUserProducts} />
             <TouchableOpacity
@@ -102,10 +88,10 @@ export default function UserProfile({ name, surname, email, address, phone }: Om
                 signOut();
                 navigator.navigate("pages/login" as never);
               }}>
-              <Text style={[globalStyles.text_blue, styles.textBtn]}>Одјависе</Text>
+              <Text style={[globalStyles.text_blue, styles.textBtn]}>Одјави се</Text>
             </TouchableOpacity>
-            <Text style={styles.text}>Просечен рејтинг:</Text>
-            <StarRating rating={calculateRating()} isDisabled={true} />
+            {/*<Text style={styles.text}>Просечен рејтинг:</Text>*/}
+            {/*<StarRating rating={calculateRating()} isDisabled={true} />*/}
           </View>
         </ScrollView>
       </ImageBackground>
@@ -128,11 +114,10 @@ const styles = StyleSheet.create({
     color: "white",
   },
   textBtn: {
-    alignSelf: "center",
+    textAlign: "center",
     fontSize: 18,
   },
   button: {
-    width: 150,
     height: 40,
     marginVertical: 20,
     paddingHorizontal: 20,

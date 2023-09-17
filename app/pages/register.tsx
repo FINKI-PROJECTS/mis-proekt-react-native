@@ -67,7 +67,10 @@ export default function RegisterScreen() {
     changeHandler("selectedImage", imgUri);
   }
 
-  const handleLocation = (address: object) => {
+  const handleLocation = (address: {
+    latitude: string,
+    longitude: string
+  }) => {
       changeHandlerAddress("latitude", address.latitude, "longitude", address.longitude)
       alert("Успешно ја ажуриравте вашата локација");
   }

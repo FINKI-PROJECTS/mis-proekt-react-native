@@ -16,6 +16,14 @@ const globalStyles = StyleSheet.create({
     text_blue: {
         color: '#7891D3'
     },
+    picker: {
+        width: '80%',
+        alignSelf: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'white',
+        borderRadius: 20,
+        marginVertical: 10,
+    },
     primary_button: {
         alignItems: 'center',
         justifyContent: 'center',

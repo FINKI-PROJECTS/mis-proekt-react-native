@@ -10,7 +10,7 @@ export default function ContactFooter(user: IRegister) {
     //TODO open the page of the selected sellers cloth
     navigation.navigate({
       name: "three",
-      params: { screen: "pages/seller", user: user },
+      params: { screen: "pages/seller", initial: false, user: user },
     } as never);
   };
 
@@ -23,7 +23,7 @@ export default function ContactFooter(user: IRegister) {
 
 const styles = StyleSheet.create({
   container: {
-    height: 80,
+    height: 70,
     borderTopColor: "grey",
     borderTopWidth: 1,
   },

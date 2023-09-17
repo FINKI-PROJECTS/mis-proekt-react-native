@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 10
+        marginTop: 10,
+        marginBottom: 10
     },
     star: {
         padding: 5,

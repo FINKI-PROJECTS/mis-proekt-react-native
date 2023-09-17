@@ -1,15 +1,10 @@
 import {
-  Image,
   ImageBackground,
-  KeyboardAvoidingView,
-  Platform,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from "react-native";
-import Navbar from "../../components/Navbar";
 import globalStyles from "../../assets/css/globalStyles";
 import CategoryButton from "../../components/buttons/CategoryButton";
 import { useNavigation } from "expo-router";

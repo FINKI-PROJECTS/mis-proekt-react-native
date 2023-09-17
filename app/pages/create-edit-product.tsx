@@ -1,43 +1,45 @@
 import {
-  Image,
   ImageBackground,
-  KeyboardAvoidingView,
+  KeyboardAvoidingView, Modal,
   Platform,
   ScrollView,
   StyleSheet,
   TextInput,
-  TouchableOpacity,
 } from "react-native";
 
 import * as ImagePicker from "expo-image-picker";
 import { Text, View } from "../../components/Themed";
 import globalStyles from "../../assets/css/globalStyles";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import SecondaryButton from "../../components/buttons/SecondaryButton";
 import ImageInput from "../../components/ImageInput";
-import AddressInput from "../../components/AddressInput";
 import BackButton from "../../components/buttons/BackButton";
 import { useNavigation } from "expo-router";
-import { IProduct, IRegister, categories, sizes } from "../interfaces/types";
+import { IProduct, categories, sizes } from "../interfaces/types";
 import { Picker } from "@react-native-picker/picker";
 import ColorPicker from "react-native-wheel-color-picker";
 import { useAuth } from "../services/context/AuthContext";
 import { getDatabase, ref, set, push } from "firebase/database";
-import { getStorage, ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage";
+import PhotoSourceModal from "../../components/PhotoSourceModal";
+import CameraScreen from "./camera";
 
 const initialState = {
   category: "Друго",
   size: "XS",
   brand: "",
   color: "white",
+  address: {
+    latitude: "",
+    longitude: ""
+  },
   price: "",
   image: "",
-  address: "",
 };
 
 export default function CreateEditProduct() {
   const [data, setData] = useState<IProduct>({ ...initialState });
-
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isCameraVisible, setIsCameraVisible] = useState(false);
   const navigator = useNavigation();
   const { user } = useAuth();
 
@@ -47,55 +49,41 @@ export default function CreateEditProduct() {
 
   // Functions to handle input changes
   const handleImagePress = async () => {
-    // TODO allow users to take picture also
-    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (!permissionResult.granted) {
-      alert("Permission to access camera roll is required!");
-      return;
-    }
-
-    const pickerResult = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 1,
-    });
-    console.log(pickerResult);
-    if (!pickerResult.canceled) {
-      const imageUri = pickerResult.assets[0].uri;
-      changeHandler("image", imageUri);
-    }
+    setIsModalVisible(true);
   };
 
-  const uploadImageAndGetURL = async (uri: string) => {
-    const storage = getStorage();
+  const handleCapture = (imgUri: string) => {
+    changeHandler("image", imgUri);
+  }
 
-    // Generating a unique filename for each image.
-    // This uses a combination of productId and a timestamp.
-    const uniqueImageName = `${Math.ceil(Math.random() * 1000000)}_${Date.now()}.jpg`;
-
-    const imageRef = storageRef(storage, `productImages/${uniqueImageName}`);
-
-    let blob: Blob;
-
-    try {
-      const response = await fetch(uri);
-      blob = await response.blob();
-    } catch (error) {
-      console.error("Error fetching the image:", error);
-      throw new Error("Failed to fetch the image.");
+  const handleModalSelection = async (selectedSource: string) => {
+    if (selectedSource === 'camera') {
+      setIsModalVisible(false);
+      setIsCameraVisible(true);
     }
 
-    // Add metadata if required, for instance setting content type.
-    const metadata = {
-      contentType: "image/jpeg",
-    };
+    else if (selectedSource === 'gallery') {
+      const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (!permissionResult.granted) {
+        alert("Permission to access camera roll is required!");
+        return;
+      }
 
-    try {
-      await uploadBytes(imageRef, blob, metadata);
-      const downloadURL = await getDownloadURL(imageRef);
-      return downloadURL;
-    } catch (error) {
-      console.error("Error uploading the image to Firebase:", error);
-      throw new Error("Failed to upload the image.");
+      const pickerResult = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        quality: 1,
+      });
+
+      if (!pickerResult.canceled) {
+        const imageUri = pickerResult.assets[0].uri;
+        changeHandler("selectedImage", imageUri);
+      }
+
+      setIsModalVisible(false);
+    }
+
+    else if (selectedSource === 'cancel') {
+      setIsModalVisible(false);
     }
   };
 
@@ -127,11 +115,12 @@ export default function CreateEditProduct() {
     }
     try {
       const database = getDatabase();
-      const productImageUrl = await uploadImageAndGetURL(data.image);
-      const newProduct = { ...data, userId: user.uid, image: productImageUrl };
+      const newProduct = { ...data, userId: user.uid };
       const productsRef = ref(database, "products/");
       const newProductRef = push(productsRef);
       await set(newProductRef, newProduct);
+      alert("Успешно додадовте производ")
+      setData({...initialState})
       navigator.navigate("index" as never);
     } catch (error: any) {
       alert(error.message);
@@ -143,83 +132,106 @@ export default function CreateEditProduct() {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={globalStyles.background_transparent}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}>
-      <ImageBackground source={require("../../assets/images/background.png")} style={globalStyles.background}>
-        <ScrollView contentContainerStyle={globalStyles.scroll_view}>
-          <BackButton title={"Назад"} source={require("../../assets/images/back-icon.png")} goBack={handleBack} />
-          <View style={globalStyles.container}>
-            <Text style={globalStyles.title}>Додади производ</Text>
+      <KeyboardAvoidingView
+          style={[globalStyles.background_transparent, styles.width]}
+          behavior={Platform.OS === "ios" ? "padding" : "height"}>
+        <ImageBackground source={require("../../assets/images/background.png")} style={globalStyles.background}>
+          <ScrollView contentContainerStyle={globalStyles.scroll_view}>
+            <BackButton title={"Назад"} source={require("../../assets/images/back-icon.png")} goBack={handleBack} />
+            <PhotoSourceModal isVisible={isModalVisible} handleChoice={handleModalSelection} />
+            <View style={globalStyles.container }>
+              <Text style={globalStyles.title}>Додади производ</Text>
 
-            <ImageInput onPress={handleImagePress} imageUri={data.image} />
+              <ImageInput onPress={handleImagePress} imageUri={data.image} />
 
-            <Picker
-              selectedValue={data.category}
-              style={globalStyles.input_field}
-              onValueChange={changeHandler.bind(null, "category")}>
-              {categories.map((category) => (
-                <Picker.Item key={category} label={category} value={category} />
-              ))}
-            </Picker>
+              <Text style={styles.title}>Категорија</Text>
+              <Picker
+                  selectedValue={data.category}
+                  style={globalStyles.picker}
+                  onValueChange={changeHandler.bind(null, "category")}>
+                {categories.map((category) => (
+                    <Picker.Item key={category} label={category} value={category} />
+                ))}
+              </Picker>
 
-            <Picker
-              selectedValue={data.size}
-              style={globalStyles.input_field}
-              onValueChange={changeHandler.bind(null, "size")}>
-              {sizes.map((size) => (
-                <Picker.Item key={size} label={size} value={size} />
-              ))}
-            </Picker>
+              <Text style={styles.title}>Големина</Text>
+              <Picker
+                  selectedValue={data.size}
+                  style={globalStyles.picker}
+                  onValueChange={changeHandler.bind(null, "size")}>
+                {sizes.map((size) => (
+                    <Picker.Item key={size} label={size} value={size} />
+                ))}
+              </Picker>
 
-            <AddressInput
-              value={data.address}
-              onChangeText={changeHandler.bind(null, "address")}
-              infoMessage={"Вашата адреса ќе биде видлива за регистрираните корисници на апликацијата!"}
-            />
+              <TextInput
+                  style={globalStyles.input_field}
+                  placeholder="Бренд"
+                  value={data.brand}
+                  onChangeText={changeHandler.bind(null, "brand")}
+              />
 
-            <TextInput
-              style={globalStyles.input_field}
-              placeholder="Бренд"
-              value={data.brand}
-              onChangeText={changeHandler.bind(null, "brand")}
-            />
+              <View style={styles.colorContainer}>
+                <ColorPicker
+                    color={data.color}
+                    onColorChange={(color) => changeHandler("color", color)}
+                    thumbSize={10}
+                    sliderSize={10}
+                    swatches={false}
+                    sliderHidden={true}
+                    noSnap={true}
+                    row={false}
+                />
+              </View>
+              <View
+                  style={{
+                    flex: 1,
+                    backgroundColor: "transparent",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "row",
+                    marginVertical: 5
+                  }}>
+                <Text>Боја: </Text>
+                <View style={{ height: 20, backgroundColor: data.color, width: 50 }} />
+              </View>
 
-            <ColorPicker
-              color={data.color}
-              onColorChange={(color) => changeHandler("color", color)}
-              thumbSize={10}
-              sliderSize={10}
-              swatches={false}
-              sliderHidden={true}
-              noSnap={true}
-              row={false}
-            />
-            <View
-              style={{
-                flex: 1,
-                backgroundColor: "transparent",
-                justifyContent: "center",
-                alignItems: "center",
-                flexDirection: "row",
-              }}>
-              <Text>Боја: </Text>
-              <View style={{ height: 20, backgroundColor: data.color, width: 100 }} />
+              <TextInput
+                  style={globalStyles.input_field}
+                  placeholder="Цена"
+                  value={data.price}
+                  keyboardType="numeric"
+                  onChangeText={changeHandler.bind(null, "price")}
+              />
+              <SecondaryButton title="Додади" onPress={handleAddNew} />
+
+              <Modal
+                  visible={isCameraVisible}
+                  onRequestClose={() => setIsCameraVisible(false)}>
+                <CameraScreen style={{ height: '100%', width: '100%' }} onCapture={handleCapture} closeCamera={() => setIsCameraVisible(false)}/>
+              </Modal>
             </View>
-
-            <TextInput
-              style={globalStyles.input_field}
-              placeholder="Цена"
-              value={data.price}
-              keyboardType="numeric"
-              onChangeText={changeHandler.bind(null, "price")}
-            />
-            <SecondaryButton title="Додади" onPress={handleAddNew} />
-          </View>
-        </ScrollView>
-      </ImageBackground>
-    </KeyboardAvoidingView>
+          </ScrollView>
+        </ImageBackground>
+      </KeyboardAvoidingView>
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  width: {
+    width: '100%'
+  },
+  colorContainer: {
+    width: '100%',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    backgroundColor: 'transparent',
+    marginVertical: 15
+  },
+  title: {
+    paddingHorizontal: 30,
+    paddingVertical: 5,
+    color: 'white',
+    fontSize: 20
+  }
+});

@@ -1,24 +1,23 @@
 import {
   Image,
   ImageBackground,
-  KeyboardAvoidingView,
-  Platform,
   ScrollView,
   StyleSheet,
   Text,
   View,
 } from "react-native";
 import globalStyles from "../../assets/css/globalStyles";
-import Navbar from "../../components/Navbar";
 import BackButton from "../../components/buttons/BackButton";
 import ContactFooter from "../../components/ContactFooter";
 import { IProduct, IRegister } from "../interfaces/types";
 import { useNavigation } from "expo-router";
 import { getDatabase, ref, get } from "firebase/database";
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
+import {useAuth} from "../services/context/AuthContext";
 
 export default function Product({ product }: { product: IProduct }) {
   const [seller, setSeller] = useState<IRegister>();
+
   const fetchUserData = async (userId: string) => {
     const db = getDatabase();
     const userRef = ref(db, `users/${userId}`);
@@ -34,7 +33,9 @@ export default function Product({ product }: { product: IProduct }) {
       return null;
     }
   };
+
   const navigator = useNavigation();
+
   const goBack = () => {
     navigator.navigate({
       name: "index",
@@ -53,6 +54,10 @@ export default function Product({ product }: { product: IProduct }) {
     };
     effect();
   }, [product]);
+
+
+  const {user} = useAuth();
+
   return (
     <View style={globalStyles.background_transparent}>
       {/*TODO if there is a user logged in, get the userId*/}
@@ -68,14 +73,12 @@ export default function Product({ product }: { product: IProduct }) {
                   <Text style={styles.text}>Големина</Text>
                   <Text style={styles.text}>Бренд</Text>
                   <Text style={styles.text}>Продавач</Text>
-                  <Text style={styles.text}>Локација</Text>
                 </View>
                 <View>
                   <Text style={styles.text}>{product.category}</Text>
                   <Text style={styles.text}>{product.size}</Text>
                   <Text style={styles.text}>{product.brand}</Text>
                   <Text style={styles.text}>{seller?.name}</Text>
-                  <Text style={styles.text}>{seller?.address}</Text>
                 </View>
               </View>
             </View>
@@ -86,7 +89,7 @@ export default function Product({ product }: { product: IProduct }) {
         </ScrollView>
       </ImageBackground>
       {/*TODO The footer should be visible only if a user is logged in*/}
-      {seller && <ContactFooter {...seller} />}
+      {user && seller && <ContactFooter {...seller} />}
     </View>
   );
 }
