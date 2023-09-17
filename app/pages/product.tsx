@@ -38,7 +38,7 @@ export default function Products({ product }: { product: IProduct }) {
                   <Text style={styles.text}>{product.size}</Text>
                   <Text style={styles.text}>{product.brand}</Text>
                   <Text style={styles.text}>{product.seller?.name}</Text>
-                  <Text style={styles.text}>{product.location}</Text>
+                  <Text style={styles.text}>{product.seller?.location}</Text>
                 </View>
               </View>
             </View>
@@ -49,7 +49,7 @@ export default function Products({ product }: { product: IProduct }) {
         </ScrollView>
       </ImageBackground>
       {/*TODO The footer should be visible only if a user is logged in*/}
-      <ContactFooter sellerId={product.seller.id} />
+      <ContactFooter sellerId={product.seller?.id} />
     </View>
   );
 }

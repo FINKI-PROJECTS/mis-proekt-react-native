@@ -2,7 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import globalStyles from "../assets/css/globalStyles";
 import { useNavigation } from "expo-router";
 interface IProps {
-  sellerId: string;
+  sellerId: string | undefined;
 }
 
 export default function ContactFooter({ sellerId }: IProps) {
