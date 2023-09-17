@@ -1,10 +1,10 @@
-import { ImageBackground, ScrollView, StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator, ImageBackground, ScrollView, StyleSheet, Text, View } from "react-native";
 import Navbar from "../../components/Navbar";
 import SimpleProductCard from "../../components/SimpleProductCard";
 import BackButton from "../../components/buttons/BackButton";
 import globalStyles from "../../assets/css/globalStyles";
 import { useNavigation } from "expo-router";
-import { getDatabase, ref, onValue, query, orderByChild, equalTo } from "firebase/database";
+import { getDatabase, ref, onValue, query, orderByChild, equalTo, get } from "firebase/database";
 import { useEffect, useState } from "react";
 import { IProduct } from "../interfaces/types";
 
@@ -29,31 +29,33 @@ export default function ListOfProducts({ name }: IProps) {
 
     const products: { [key: string]: IProduct } = {};
 
-    // Use the onValue method to fetch the products by category.
-    // This will give you both the product data and the product ID.
-    onValue(q, (snapshot) => {
-      if (snapshot.exists()) {
-        snapshot.forEach((childSnapshot) => {
-          const productId = childSnapshot.key;
-          const productData = childSnapshot.val() as IProduct;
-          if (productId) {
-            products[productId] = productData;
-          }
-        });
-      }
-    });
+    // Use the get method to fetch the products by category.
+    const snapshot = await get(q);
+    if (snapshot.exists()) {
+      snapshot.forEach((childSnapshot) => {
+        const productId = childSnapshot.key;
+        const productData = childSnapshot.val() as IProduct;
+        console.log("Data");
+        if (productId) {
+          products[productId] = productData;
+        }
+      });
+    }
 
     return products;
   };
 
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const effect = async () => {
-      const products = await fetchProductsByCategory(name);
-      setProducts(Object.keys(products).map((key) => ({ ...products[key], id: key })));
+      setLoading(true);
+      const prod = await fetchProductsByCategory(name);
+      setProducts(Object.keys(prod).map((key) => ({ ...prod[key], id: key })));
+      setLoading(false);
     };
     effect();
-  }, []);
-  console.log(products.length);
+  }, [name]);
+
   return (
     <View style={[globalStyles.background_transparent]}>
       <ImageBackground source={require("../../assets/images/background.png")} style={globalStyles.background}>
@@ -62,8 +64,14 @@ export default function ListOfProducts({ name }: IProps) {
           <View style={styles.center}>
             <Text style={styles.text}>{name}</Text>
           </View>
-          {products.length ? (
-            products.map((product) => <SimpleProductCard key={product.id} {...product} />)
+          {loading ? (
+            <ActivityIndicator size="large" color="#0000ff" />
+          ) : products.length ? (
+            <>
+              {products.map((product) => (
+                <SimpleProductCard key={product.id} {...product} />
+              ))}
+            </>
           ) : (
             <View
               style={{

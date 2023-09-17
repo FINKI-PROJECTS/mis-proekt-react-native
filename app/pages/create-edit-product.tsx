@@ -12,7 +12,7 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import { Text, View } from "../../components/Themed";
 import globalStyles from "../../assets/css/globalStyles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SecondaryButton from "../../components/buttons/SecondaryButton";
 import ImageInput from "../../components/ImageInput";
 import AddressInput from "../../components/AddressInput";
@@ -38,12 +38,12 @@ const initialState = {
 export default function CreateEditProduct() {
   const [data, setData] = useState<IProduct>({ ...initialState });
 
+  const navigator = useNavigation();
   const { user } = useAuth();
+
   const changeHandler = (name: string, value: string) => {
     setData((prev) => ({ ...prev, [name]: value }));
   };
-
-  const navigator = useNavigation();
 
   // Functions to handle input changes
   const handleImagePress = async () => {
