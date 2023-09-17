@@ -17,10 +17,13 @@ export interface IProduct {
   category: string;
   size: string;
   brand: string;
-  seller: {
+  color: string;
+  image: string;
+  address: string;
+  seller?: {
     id: string;
     name: string;
+    location: string;
   };
-  location: string;
   price: string;
 }
