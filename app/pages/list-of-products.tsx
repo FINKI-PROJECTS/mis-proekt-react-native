@@ -35,7 +35,6 @@ export default function ListOfProducts({ name }: IProps) {
       snapshot.forEach((childSnapshot) => {
         const productId = childSnapshot.key;
         const productData = childSnapshot.val() as IProduct;
-        console.log("Data");
         if (productId) {
           products[productId] = productData;
         }

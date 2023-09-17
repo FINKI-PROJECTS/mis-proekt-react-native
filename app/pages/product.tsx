@@ -13,18 +13,26 @@ import Navbar from "../../components/Navbar";
 import BackButton from "../../components/buttons/BackButton";
 import ContactFooter from "../../components/ContactFooter";
 import { IProduct } from "../interfaces/types";
+import { useNavigation } from "expo-router";
 
-export default function Products({ product }: { product: IProduct }) {
+export default function Product({ product }: { product: IProduct }) {
+  const navigator = useNavigation();
+  const goBack = () => {
+    navigator.navigate({
+      name: "index",
+      params: { screen: "pages/list-of-products", id: product.category },
+    } as never);
+  };
   return (
     <View style={globalStyles.background_transparent}>
       {/*TODO if there is a user logged in, get the userId*/}
       <Navbar />
       <ImageBackground source={require("../../assets/images/background.png")} style={globalStyles.background}>
         <ScrollView>
-          <BackButton title={"Назад"} source={require("../../assets/images/back-icon.png")} />
+          <BackButton title={"Назад"} source={require("../../assets/images/back-icon.png")} goBack={goBack} />
           <View style={[globalStyles.container, globalStyles.shadow]}>
             <View style={globalStyles.white_container}>
-              <Image source={require("../../assets/images/example-cloth.png")} style={globalStyles.cloth_image} />
+              <Image source={{ uri: product.image }} style={globalStyles.cloth_image} />
               <View style={globalStyles.cloth_description}>
                 <View>
                   <Text style={styles.text}>Категорија</Text>

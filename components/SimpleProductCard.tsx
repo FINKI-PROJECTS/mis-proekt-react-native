@@ -8,7 +8,12 @@ export default function SimpleProductCard(product: IProduct) {
   const navigation = useNavigation();
 
   const handleNavigation = () => {
-    if (product.id) navigation.navigate(("/products/" + product.category + "/" + product.id) as never);
+    if (product.id) {
+      navigation.navigate({
+        name: "index",
+        params: { screen: "pages/list-of-products", id: product.category, product: product },
+      } as never);
+    }
   };
   return (
     <TouchableOpacity style={[globalStyles.simple_product, globalStyles.shadow]} onPress={handleNavigation}>

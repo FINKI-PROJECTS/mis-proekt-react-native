@@ -53,7 +53,6 @@ export default function CreateEditProduct() {
       alert("Permission to access camera roll is required!");
       return;
     }
-    console.log("Test");
 
     const pickerResult = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
