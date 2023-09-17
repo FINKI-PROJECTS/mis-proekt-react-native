@@ -1,19 +1,31 @@
 import React, { SetStateAction, useEffect, useRef, useState } from "react";
-import { View, TextInput, TouchableOpacity, StyleSheet, Text, TouchableWithoutFeedback, Modal } from "react-native";
+import {
+  View,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  Modal,
+  Button
+} from "react-native";
 // @ts-ignore
 import Icon from "react-native-vector-icons/FontAwesome";
-import globalStyles from "../assets/css/globalStyles"; // Import an icon from your chosen icon library
+import globalStyles from "../assets/css/globalStyles";
+import CameraScreen from "../app/pages/camera";
+import MapScreen from "./MapScreen";
 
 export default function AddressInput({
-  value,
-  onChangeText,
-  infoMessage,
-}: {
+                                       value,
+                                       onPress,
+                                       infoMessage,
+                                     }: {
   value: string;
-  onChangeText: (text: string) => void | undefined;
+  onPress: (address: object) => void | undefined;
   infoMessage: string;
 }) {
   const [showInfo, setShowInfo] = useState(false);
+  const [isMapVisible, setIsMapVisible] = useState(false);
 
   const handleInfoPress = () => {
     setShowInfo(!showInfo);
@@ -23,22 +35,36 @@ export default function AddressInput({
     setShowInfo(false);
   };
 
+  const openMap = () => {
+    setIsMapVisible(true);
+  }
+
+  const saveAddress = (address: object) => {
+    onPress(address);
+  }
+
   return (
-    <View style={[globalStyles.input_field, styles.container]}>
-      <TextInput style={styles.input} placeholder={"Адреса"} value={value} onChangeText={onChangeText} />
-      <TouchableOpacity style={styles.infoIcon} onPress={handleInfoPress}>
-        <Icon name="info-circle" size={20} color="#7891D3" />
-      </TouchableOpacity>
-      <Modal visible={showInfo} transparent animationType={"fade"}>
-        <TouchableWithoutFeedback onPress={handleOutsidePress}>
-          <View style={styles.overlay}>
-            <View style={styles.infoTooltip}>
-              <Text>{infoMessage}</Text>
+      <View style={styles.container}>
+        <TouchableOpacity style={[globalStyles.secondary_button, styles.button, globalStyles.shadow]} onPress={openMap}>
+          <Text style={globalStyles.text_white}>Одбери адреса</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.infoIcon} onPress={handleInfoPress}>
+          <Icon name="info-circle" size={20} color="white" />
+        </TouchableOpacity>
+        <Modal visible={showInfo} transparent animationType={"fade"}>
+          <TouchableWithoutFeedback onPress={handleOutsidePress}>
+            <View style={styles.overlay}>
+              <View style={styles.infoTooltip}>
+                <Text>{infoMessage}</Text>
+              </View>
             </View>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
-    </View>
+          </TouchableWithoutFeedback>
+        </Modal>
+        <Modal
+            visible={isMapVisible}>
+          <MapScreen style={{ height: '100%', width: '100%' }} saveAddress={saveAddress} closeMap={() => setIsMapVisible(false)}/>
+        </Modal>
+      </View>
   );
 }
 
@@ -46,7 +72,14 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
+    alignItems: 'center',
+    alignSelf: 'center',
+    width: 245
+  },
+  button: {
+    width: 200,
+    paddingVertical: 10,
+    marginVertical: 15
   },
   input: {
     fontSize: 18,
