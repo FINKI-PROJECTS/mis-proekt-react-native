@@ -11,12 +11,6 @@ import { useAuth } from "../services/context/AuthContext";
 
 export default function Seller(user: IRegister | undefined) {
   const navigator = useNavigation();
-  const { userData } = useAuth();
-  useFocusEffect(() => {
-    if (!userData) {
-      navigator.navigate("pages/login" as never);
-    }
-  });
 
   // TODO navigate to the list of a particular ID of a seller
   const showListOfRatings = () => {

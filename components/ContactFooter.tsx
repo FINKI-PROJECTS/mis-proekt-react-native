@@ -13,7 +13,6 @@ export default function ContactFooter(user: IRegister) {
       params: { screen: "pages/seller", user: user },
     } as never);
   };
-  console.log("Test");
 
   return (
     <TouchableOpacity style={[styles.container, globalStyles.background_blue]} onPress={handleSeller}>
