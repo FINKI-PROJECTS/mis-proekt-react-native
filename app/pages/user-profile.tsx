@@ -46,7 +46,6 @@ export default function UserProfile({ name, surname, email, address, phone }: Om
     <KeyboardAvoidingView
       style={globalStyles.background_transparent}
       behavior={Platform.OS === "ios" ? "padding" : "height"}>
-      <Navbar />
       <ImageBackground source={require("../../assets/images/background.png")} style={globalStyles.background}>
         <ScrollView>
           <Text style={[globalStyles.wide_title]}>МОЈ ПРОФИЛ</Text>

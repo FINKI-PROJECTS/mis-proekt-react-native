@@ -5,10 +5,18 @@ import BackButton from "../../components/buttons/BackButton";
 import RatingFooter from "../../components/RatingFooter";
 import StarRating from "../../components/StarRating";
 import SecondaryButton from "../../components/buttons/SecondaryButton";
-import { useNavigation } from "expo-router";
+import { useFocusEffect, useNavigation } from "expo-router";
+import { IRegister } from "../interfaces/types";
+import { useAuth } from "../services/context/AuthContext";
 
-export default function Seller() {
+export default function Seller(user: IRegister | undefined) {
   const navigator = useNavigation();
+  const { userData } = useAuth();
+  useFocusEffect(() => {
+    if (!userData) {
+      navigator.navigate("pages/login" as never);
+    }
+  });
 
   // TODO navigate to the list of a particular ID of a seller
   const showListOfRatings = () => {
@@ -22,35 +30,30 @@ export default function Seller() {
 
   return (
     <View style={globalStyles.background_transparent}>
-      <Navbar />
       <ImageBackground source={require("../../assets/images/background.png")} style={globalStyles.background}>
         <ScrollView>
           <BackButton title={"Назад"} source={require("../../assets/images/back-icon.png")} />
           <View style={[globalStyles.container, globalStyles.shadow]}>
             <View style={globalStyles.white_container}>
-              <Text style={[globalStyles.wide_title, styles.custom_width]}>ПРОДАВАЧ</Text>
-              <Text style={styles.seller_name}>Сара Стојановска</Text>
-              <Image
-                source={require("../../assets/images/user_photo.png")}
-                style={[globalStyles.background_blue, styles.image_style]}
-              />
+              <Text style={styles.seller_name}>
+                {user?.name || ""} {user?.surname || ""}
+              </Text>
+              <Image source={{ uri: user?.selectedImage }} style={[globalStyles.background_blue, styles.image_style]} />
               <View style={styles.owner_description}>
                 <View>
                   <Text style={styles.text}>Телефонски број</Text>
                   <Text style={styles.text}>Е-маил</Text>
                   <Text style={styles.text}>Адреса</Text>
-                  <Text style={styles.text}>Локација</Text>
                 </View>
                 <View>
-                  <Text style={styles.text}>/dynamic value/</Text>
-                  <Text style={styles.text}>/dynamic value/</Text>
-                  <Text style={styles.text}>/dynamic value/</Text>
-                  <Text style={styles.text}>/dynamic value/</Text>
+                  <Text style={styles.text}>{user?.phone}</Text>
+                  <Text style={styles.text}>{user?.email}</Text>
+                  <Text style={styles.text}>{user?.address}</Text>
                 </View>
               </View>
               <Text>Рејтинг</Text>
               <StarRating rating={3} isDisabled={true} />
-              <SecondaryButton title={"Погледни рејтинзи"} onPress={showListOfRatings} />
+              {/* <SecondaryButton title={"Погледни рејтинзи"} onPress={showListOfRatings} /> */}
             </View>
           </View>
         </ScrollView>
@@ -74,6 +77,8 @@ const styles = StyleSheet.create({
   },
   image_style: {
     marginVertical: 20,
+    width: 100, // or another value
+    height: 100, // or another value
   },
   text: {
     fontSize: 15,

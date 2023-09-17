@@ -21,11 +21,8 @@ export interface IProduct {
   color: string;
   image: string;
   address: string;
-  seller?: {
-    id: string;
-    name: string;
-    location: string;
-  };
+  userId?: string;
+  seller?: IRegister;
   price: string;
 }
 
