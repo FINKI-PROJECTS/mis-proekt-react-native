@@ -58,7 +58,6 @@ function RootLayoutNav() {
             <Stack.Screen name="pages/create-edit-product" options={{ headerShown: false }} />
             <Stack.Screen name="pages/user-list-of-products" options={{ headerShown: false }} />
             <Stack.Screen name="pages/user-profile" options={{ headerShown: false }} />
-            <Stack.Screen name="pages/camera" options={{ headerShown: false }} />
             <Stack.Screen name="modal" options={{ presentation: "modal" }} />
           </Stack>
         </ThemeProvider>

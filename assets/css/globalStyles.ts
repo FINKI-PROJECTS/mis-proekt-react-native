@@ -149,24 +149,6 @@ const globalStyles = StyleSheet.create({
         fontSize: 40,
         letterSpacing: 4,
         paddingTop: 30
-    },
-    cancel_option: {
-        fontSize: 18,
-        paddingVertical: 10,
-        textAlign: 'center',
-        color: 'red',
-    },
-    camera_button_container: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        paddingVertical: 20,
-        paddingHorizontal: 16,
-        paddingBottom: 30,
     }
 });
 
