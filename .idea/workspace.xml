@@ -6,8 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="4e1a3114-aaf9-404b-85a6-43335bd1b3bf" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/app/pages/register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/register.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/AddressInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/AddressInput.tsx" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/pages/register.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/pages/register.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/globalStyles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/globalStyles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+>>>>>>> master
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +45,7 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+<<<<<<< HEAD
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
@@ -49,6 +59,21 @@
     "nodejs_package_manager_path": "yarn",
     "ts.external.directory.path": "D:\\FINKI\\VII_Semestar\\Mobilni informaciski sistemi\\mis-proekt-react-native\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
+=======
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/camera&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/FINKI/VII_Semestar/Mobilni informaciski sistemi/mis-proekt-react-native&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\FINKI\\VII_Semestar\\Mobilni informaciski sistemi\\mis-proekt-react-native\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+>>>>>>> master
   }
 }]]></component>
   <component name="RecentsManager">
