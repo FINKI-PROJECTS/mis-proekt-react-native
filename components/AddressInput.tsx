@@ -20,9 +20,12 @@ export default function AddressInput({
                                        onPress,
                                        infoMessage,
                                      }: {
-  value: string;
-  onPress: (address: object) => void | undefined;
+  value: {
+    latitude: string,
+    longitude: string
+  };
   infoMessage: string;
+  onPress: (value: {latitude: string, longitude: string}) => void;
 }) {
   const [showInfo, setShowInfo] = useState(false);
   const [isMapVisible, setIsMapVisible] = useState(false);
@@ -39,7 +42,9 @@ export default function AddressInput({
     setIsMapVisible(true);
   }
 
-  const saveAddress = (address: object) => {
+  const saveAddress = (address: {
+    latitude: string, longitude: string
+  }) => {
     onPress(address);
   }
 

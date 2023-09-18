@@ -80,7 +80,7 @@ export default function ListOfProducts({ name }: IProps) {
                 alignItems: "center",
                 flexDirection: "row",
               }}>
-              <Text>Не се пронајдени производи за ова категорија</Text>
+              <Text style={styles.description}>Не се пронајдени производи за ова категорија</Text>
             </View>
           )}
         </ScrollView>
@@ -98,5 +98,13 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 30,
     fontWeight: "bold",
+    color: '#7891D3',
+    marginTop: 20
   },
+  description: {
+    alignSelf: 'center',
+    marginVertical: 20,
+    textAlign: 'center',
+    fontSize: 18
+  }
 });

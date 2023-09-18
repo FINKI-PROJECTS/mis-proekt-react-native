@@ -8,9 +8,15 @@ import SecondaryButton from "../../components/buttons/SecondaryButton";
 import { useFocusEffect, useNavigation } from "expo-router";
 import { IRegister } from "../interfaces/types";
 import { useAuth } from "../services/context/AuthContext";
+import {useRoute} from "@react-navigation/native";
 
-export default function Seller(user: IRegister | undefined) {
+interface IType {
+  user?: IRegister;
+}
+export default function Seller() {
   const navigator = useNavigation();
+  const route = useRoute();
+  const { user } = route.params;
 
   // TODO navigate to the list of a particular ID of a seller
   const showListOfRatings = () => {
@@ -22,8 +28,37 @@ export default function Seller(user: IRegister | undefined) {
     navigator.navigate("pages/leave-rating" as never);
   };
 
+  function haversineDistance(lat1: number, lon1: number, lat2: number, lon2: number) {
+    const R = 6371; // Earth's radius in kilometers
+
+    // Convert degrees to radians
+    const degToRad = (degree: number) => degree * (Math.PI / 180);
+
+    // Convert latitudes and longitudes from degrees to radians
+    lat1 = degToRad(lat1);
+    lon1 = degToRad(lon1);
+    lat2 = degToRad(lat2);
+    lon2 = degToRad(lon2);
+
+    // Calculate differences between latitudes and longitudes
+    const dLat = lat2 - lat1;
+    const dLon = lon2 - lon1;
+
+    // Haversine formula
+    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(lat1) * Math.cos(lat2) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = R * c;
+
+    return distance; // Returns distance in kilometers
+  }
+
+  const {userData} = useAuth();
+
   return (
     <View style={globalStyles.background_transparent}>
+      <Navbar/>
       <ImageBackground source={require("../../assets/images/background.png")} style={globalStyles.background}>
         <ScrollView>
           <BackButton title={"Назад"} source={require("../../assets/images/back-icon.png")} />
@@ -37,12 +72,17 @@ export default function Seller(user: IRegister | undefined) {
                 <View>
                   <Text style={styles.text}>Телефонски број</Text>
                   <Text style={styles.text}>Е-маил</Text>
-                  <Text style={styles.text}>Адреса</Text>
+                  <Text style={styles.text}>Оддалеченост</Text>
                 </View>
                 <View>
                   <Text style={styles.text}>{user?.phone}</Text>
                   <Text style={styles.text}>{user?.email}</Text>
-                  <Text style={styles.text}>{user?.address}</Text>
+                  <Text style={styles.text}>{haversineDistance(
+                      +(user?.address?.latitude || 0),
+                      +(user?.address?.longitude || 0),
+                      +(userData?.address?.latitude || 0),
+                      +(userData?.address?.longitude || 0)
+                  )} km</Text>
                 </View>
               </View>
               <Text>Рејтинг</Text>
@@ -51,8 +91,7 @@ export default function Seller(user: IRegister | undefined) {
             </View>
           </View>
         </ScrollView>
-        {/*TODO The footer should be visible only if a user is logged in*/}
-        <RatingFooter onPress={openRatingForm} />
+        {/*<RatingFooter onPress={openRatingForm} />*/}
       </ImageBackground>
     </View>
   );
@@ -61,6 +100,7 @@ export default function Seller(user: IRegister | undefined) {
 const styles = StyleSheet.create({
   seller_name: {
     letterSpacing: 3,
+    marginTop: 20
   },
   owner_description: {
     paddingVertical: 20,
