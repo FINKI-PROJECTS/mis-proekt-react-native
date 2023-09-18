@@ -51,27 +51,13 @@ export default function TabLayout() {
                     title: "",
                     tabBarIcon: ({color}) => <TabBarIcon name="plus" color={color}/>,
                     header: () => <Navbar/>,
-                    // headerRight: () => (
-                    //   <Link href="/modal" asChild>
-                    //     <Pressable>
-                    //       {({ pressed }) => (
-                    //         <FontAwesome
-                    //           name="info-circle"
-                    //           size={25}
-                    //           color={Colors[colorScheme ?? "light"].text}
-                    //           style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                    //         />
-                    //       )}
-                    //     </Pressable>
-                    //   </Link>
-                    // ),
                 }}
             />
             <Tabs.Screen
                 name="three"
                 options={{
                     title: "",
-                    tabBarIcon: ({color}) => <TabBarIcon name="user" color={color}/>,
+                    tabBarIcon: ({color}) => <TabBarIcon name="bars" color={color}/>,
                     header: () => <Navbar/>,
                 }}
             />

@@ -24,7 +24,7 @@ import PhotoSourceModal from "../../components/PhotoSourceModal";
 import CameraScreen from "./camera";
 
 const initialState = {
-  category: "Друго",
+  category: "Блузи",
   size: "XS",
   brand: "",
   color: "white",
@@ -76,7 +76,7 @@ export default function CreateEditProduct() {
 
       if (!pickerResult.canceled) {
         const imageUri = pickerResult.assets[0].uri;
-        changeHandler("selectedImage", imageUri);
+        changeHandler("image", imageUri);
       }
 
       setIsModalVisible(false);
@@ -120,7 +120,6 @@ export default function CreateEditProduct() {
       const newProductRef = push(productsRef);
       await set(newProductRef, newProduct);
       alert("Успешно додадовте производ")
-      setData({...initialState})
       navigator.navigate("index" as never);
     } catch (error: any) {
       alert(error.message);
@@ -171,6 +170,7 @@ export default function CreateEditProduct() {
                   onChangeText={changeHandler.bind(null, "brand")}
               />
 
+              {data.color &&
               <View style={styles.colorContainer}>
                 <ColorPicker
                     color={data.color}
@@ -182,7 +182,8 @@ export default function CreateEditProduct() {
                     noSnap={true}
                     row={false}
                 />
-              </View>
+              </View> }
+
               <View
                   style={{
                     flex: 1,

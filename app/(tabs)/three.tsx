@@ -8,6 +8,8 @@ import Seller from "../pages/seller";
 import { useAuth } from "../services/context/AuthContext";
 import {  useNavigation } from "expo-router";
 import globalStyles from "../../assets/css/globalStyles";
+import UserProfile from "../pages/user-profile";
+import UserListOfProducts from "../pages/user-list-of-products";
 
 interface IType {
   screen: string;
@@ -22,8 +24,8 @@ export default function TabThreeScreen() {
 
 
 
-  if (params?.screen === "pages/seller" && params?.user) {
-    return <Seller {...params.user} />;
+  if (params?.screen === "pages/user-list-of-products" && params?.user) {
+    return <UserListOfProducts {...params.user} />;
   }
 
   if (!userData) {
@@ -40,7 +42,7 @@ export default function TabThreeScreen() {
       </View>
     );
   }
-  return userData ? <Seller {...(userData as IRegister)} /> : <></>;
+  return userData ? <UserListOfProducts {...(userData as IRegister)} /> : <></>;
 }
 
 const styles = StyleSheet.create({

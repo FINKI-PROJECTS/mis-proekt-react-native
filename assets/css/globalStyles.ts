@@ -22,6 +22,7 @@ const globalStyles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: 'white',
         borderRadius: 20,
+        height: 170,
         marginVertical: 10,
     },
     primary_button: {

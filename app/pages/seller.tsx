@@ -8,9 +8,15 @@ import SecondaryButton from "../../components/buttons/SecondaryButton";
 import { useFocusEffect, useNavigation } from "expo-router";
 import { IRegister } from "../interfaces/types";
 import { useAuth } from "../services/context/AuthContext";
+import {useRoute} from "@react-navigation/native";
 
-export default function Seller(user: IRegister | undefined) {
+interface IType {
+  user?: IRegister;
+}
+export default function Seller() {
   const navigator = useNavigation();
+  const route = useRoute();
+  const { user } = route.params;
 
   // TODO navigate to the list of a particular ID of a seller
   const showListOfRatings = () => {
@@ -52,6 +58,7 @@ export default function Seller(user: IRegister | undefined) {
 
   return (
     <View style={globalStyles.background_transparent}>
+      <Navbar/>
       <ImageBackground source={require("../../assets/images/background.png")} style={globalStyles.background}>
         <ScrollView>
           <BackButton title={"Назад"} source={require("../../assets/images/back-icon.png")} />

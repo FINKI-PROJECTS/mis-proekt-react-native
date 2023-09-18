@@ -18,6 +18,7 @@ interface IType {
 }
 export default function Categories() {
   const navigator = useNavigation();
+  const { user } = useAuth();
 
   const handleNavigation = (name: string) => {
     navigator.navigate({
@@ -31,8 +32,8 @@ export default function Categories() {
   };
 
   const windowHeight = Dimensions.get("window").height;
-  const desiredHeight = windowHeight * 0.6;
-  const { user } = useAuth();
+  const desiredHeight = user ? windowHeight * 0.6 : windowHeight * 0.7;
+
   return (
     <View style={globalStyles.background_transparent}>
       <ImageBackground source={require("../../assets/images/background.png")} style={globalStyles.background}>

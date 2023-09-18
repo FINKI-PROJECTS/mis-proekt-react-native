@@ -6,7 +6,6 @@ import {
   ScrollView,
   StyleSheet,
   TextInput,
-  TouchableOpacity,
 } from "react-native";
 
 import * as ImagePicker from "expo-image-picker";

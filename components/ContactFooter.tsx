@@ -9,8 +9,8 @@ export default function ContactFooter(user: IRegister) {
   const handleSeller = () => {
     //TODO open the page of the selected sellers cloth
     navigation.navigate({
-      name: "three",
-      params: { screen: "pages/seller", initial: false, user: user },
+      name: "pages/seller",
+      params: { user: user },
     } as never);
   };
 

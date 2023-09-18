@@ -1,5 +1,4 @@
 import {
-  Button,
   ImageBackground,
   KeyboardAvoidingView,
   Platform,
@@ -81,18 +80,18 @@ export default function UserProfile() {
             />
 
             {/* <Button title="Зачувај" onPress={() => {}} /> */}
-            <MyProductsButton onPress={openUserProducts} />
-            <TouchableOpacity
-              style={[styles.button, globalStyles.shadow]}
+            {/*<MyProductsButton onPress={openUserProducts} />*/}
+            {/*<Text style={styles.text}>Просечен рејтинг:</Text>*/}
+            {/*<StarRating rating={calculateRating()} isDisabled={true} />*/}
+          </View>
+          <TouchableOpacity
+              style={[styles.button, globalStyles.shadow, globalStyles.secondary_button]}
               onPress={() => {
                 signOut();
                 navigator.navigate("pages/login" as never);
               }}>
-              <Text style={[globalStyles.text_blue, styles.textBtn]}>Одјави се</Text>
-            </TouchableOpacity>
-            {/*<Text style={styles.text}>Просечен рејтинг:</Text>*/}
-            {/*<StarRating rating={calculateRating()} isDisabled={true} />*/}
-          </View>
+            <Text style={[globalStyles.text_white, styles.textBtn]}>Одјави се</Text>
+          </TouchableOpacity>
         </ScrollView>
       </ImageBackground>
     </KeyboardAvoidingView>
